@@ -1,4 +1,4 @@
 package itscoronatime;
 
-public class HazmatSuit implements Collectable {
+public class HazmatSuit extends Entity {
 }
