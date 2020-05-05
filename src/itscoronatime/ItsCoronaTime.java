@@ -12,7 +12,8 @@ public class ItsCoronaTime extends Application {
     public static void main(String[] args) { launch(args); }
 
     //adds in all the different pictures
-    private Image image = new Image("image/StartScreen.png");
+    private Image startImage = new Image("image/StartScreen.png");
+    private Image arenaImage = new Image("image/CoronaTimeArenaTemplate.jpeg");
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -22,15 +23,17 @@ public class ItsCoronaTime extends Application {
 
         Pane pane = new Pane();
 
-        pane.getChildren().add(new ImageView(image));
 
-        Scene scene = new Scene(pane, 2220, 1248);
+
+        pane.getChildren().add(new ImageView(startImage));
+
+        Scene scene = new Scene(pane, 1000, 1000);
 
         primaryStage.setTitle("Its Corona Time");
         primaryStage.setScene(scene);
         primaryStage.show();
 
-        //test for merged branch
+
 
     }
 }
