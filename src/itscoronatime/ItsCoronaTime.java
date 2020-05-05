@@ -30,7 +30,7 @@ public class ItsCoronaTime extends Application {
         primaryStage.setScene(scene);
         primaryStage.show();
 
-
+        //test for merged branch
 
     }
 }
