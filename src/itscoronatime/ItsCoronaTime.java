@@ -16,7 +16,7 @@ public class ItsCoronaTime extends Application {
     //adds in all the different pictures
     private Image startImage = new Image("image/StartScreen.png");
     private Image arenaImage = new Image("image/CoronaTimeArenaTemplate.jpeg");
-
+    private boolean startScreen = true;
     @Override
     public void start(Stage primaryStage) throws Exception {
 
@@ -36,9 +36,13 @@ public class ItsCoronaTime extends Application {
         scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent event) {
-                System.out.println("Key pressed");
-                pane.getChildren().remove(startImage);
-                pane.getChildren().add(new ImageView(arenaImage));
+                if(startScreen)
+                {
+                    System.out.println("Key pressed");
+                    pane.getChildren().remove(startImage);
+                    pane.getChildren().add(new ImageView(arenaImage));
+                    startScreen = false;
+                }
             }
         });
 
