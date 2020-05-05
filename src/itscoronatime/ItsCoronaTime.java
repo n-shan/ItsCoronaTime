@@ -1,9 +1,11 @@
 package itscoronatime;
 
 import javafx.application.Application;
+import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
@@ -23,8 +25,6 @@ public class ItsCoronaTime extends Application {
 
         Pane pane = new Pane();
 
-
-
         pane.getChildren().add(new ImageView(startImage));
 
         Scene scene = new Scene(pane, 1000, 1000);
@@ -33,7 +33,14 @@ public class ItsCoronaTime extends Application {
         primaryStage.setScene(scene);
         primaryStage.show();
 
-
+        scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent event) {
+                System.out.println("Key pressed");
+                pane.getChildren().remove(startImage);
+                pane.getChildren().add(new ImageView(arenaImage));
+            }
+        });
 
     }
 }
