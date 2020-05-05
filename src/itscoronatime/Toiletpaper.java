@@ -1,4 +1,4 @@
 package itscoronatime;
 
-public class Toiletpaper implements Collectible {
+public class Toiletpaper extends Entity {
 }

@@ -1,5 +1,4 @@
 package itscoronatime;
 
-
-public class Coronavirus implements Entity {
+public class Coronavirus extends Entity {
 }
