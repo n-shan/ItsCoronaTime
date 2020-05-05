@@ -12,5 +12,7 @@ public class ItsCoronaTime extends Application {
 
         //starts the game
         //Arena arena = new Arena
+
+        //here is a test for itscorona time
     }
 }
