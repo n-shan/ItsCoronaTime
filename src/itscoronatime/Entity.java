@@ -1,8 +1,8 @@
 package itscoronatime;
 
 public interface Entity {
-    public boolean isDead();
-    public void setDead();
+    public boolean isVisible();
+    public void setVisibility(boolean isVisible);
 
     public int getXLocation();
     public int getYLocation();
