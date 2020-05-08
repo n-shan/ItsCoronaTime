@@ -7,6 +7,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 public class ItsCoronaTime extends Application {
@@ -23,11 +24,24 @@ public class ItsCoronaTime extends Application {
         //starts the game
         //Arena arena = new Arena
 
+        Person person = new Person(100, 100);
+
+        Pane personPane = new Pane();
+
+        Image personImage = new Image(person.getImageName(), person.getX(), person.getY(), false, false);
+        personPane.getChildren().add(new ImageView(personImage));
+
+        StackPane stackPane = new StackPane();
+
+
+
         Pane pane = new Pane();
 
         pane.getChildren().add(new ImageView(startImage));
 
-        Scene scene = new Scene(pane, 1000, 1000);
+        stackPane.getChildren().addAll(pane);
+
+        Scene scene = new Scene(stackPane, 1000, 1000);
 
         primaryStage.setTitle("Its Corona Time");
         primaryStage.setScene(scene);
@@ -41,6 +55,7 @@ public class ItsCoronaTime extends Application {
                     System.out.println("Key pressed");
                     pane.getChildren().remove(startImage);
                     pane.getChildren().add(new ImageView(arenaImage));
+                    stackPane.getChildren().add(personPane);
                     startScreen = false;
                 }
             }
