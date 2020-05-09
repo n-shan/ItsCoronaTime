@@ -5,6 +5,7 @@ import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
@@ -24,12 +25,16 @@ public class ItsCoronaTime extends Application {
         //starts the game
         //Arena arena = new Arena
 
-        Person person = new Person(100, 100);
+        Person person = new Person(50, 90, 50, 50);
 
         Pane personPane = new Pane();
 
-        Image personImage = new Image(person.getImageName(), person.getX(), person.getY(), false, false);
-        personPane.getChildren().add(new ImageView(personImage));
+        Image personImage = new Image(person.getImageName(), person.getWidth(), person.getHeight(), false, false);
+        ImageView imageView = new ImageView();
+        imageView.setImage(personImage);
+        imageView.setX(person.getX());
+        imageView.setY(person.getY());
+        personPane.getChildren().add(imageView);
 
         StackPane stackPane = new StackPane();
 
@@ -57,6 +62,26 @@ public class ItsCoronaTime extends Application {
                     pane.getChildren().add(new ImageView(arenaImage));
                     stackPane.getChildren().add(personPane);
                     startScreen = false;
+                }
+                if(event.getCode() == KeyCode.DOWN)
+                {
+                    person.setY((int) (imageView.getY()+10));
+                    imageView.setY(person.getY());
+                }
+                if(event.getCode() == KeyCode.UP)
+                {
+                    person.setY((int) (imageView.getY()-10));
+                    imageView.setY(person.getY());
+                }
+                if(event.getCode() == KeyCode.LEFT)
+                {
+                    person.setX((int) (imageView.getX()-10));
+                    imageView.setX(person.getX());
+                }
+                if(event.getCode() == KeyCode.RIGHT)
+                {
+                    person.setX((int) (imageView.getX()+10));
+                    imageView.setX(person.getX());
                 }
             }
         });

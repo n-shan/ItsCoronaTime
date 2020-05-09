@@ -1,17 +1,19 @@
 package itscoronatime;
 
 public class Person extends Entity {
-    private int lives;
-    private int score;
+    private int m_lives;
+    private int m_score;
     private String imageName = "image/PacMan.png";
-    private int xPos, yPos;
+    private int m_x, m_y, m_width, m_height;
 
-    public Person(int x, int y)
+    public Person(int x, int y, int width, int height)
     {
-        xPos = x;
-        yPos = y;
-        lives = 3;
-        score = 0;
+        m_x = x;
+        m_y = y;
+        m_width = width;
+        m_height = height;
+        m_lives = 3;
+        m_score = 0;
     }
 
     public String getImageName()
@@ -21,22 +23,30 @@ public class Person extends Entity {
 
     public int getLives()
     {
-        return lives;
+        return m_lives;
     }
 
     public int getScore()
     {
-        return score;
+        return m_score;
     }
 
     public int getX()
     {
-        return xPos;
+        return m_x;
     }
 
     public int getY()
     {
-        return yPos;
+        return m_y;
     }
+
+    public int getWidth() { return m_width; }
+
+    public int getHeight() { return m_height; }
+
+    public void setX(int x) { m_x = x; }
+
+    public void setY(int y) { m_y = y; }
 
 }
