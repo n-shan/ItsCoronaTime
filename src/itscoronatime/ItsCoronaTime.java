@@ -5,8 +5,10 @@ import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 public class ItsCoronaTime extends Application {
@@ -23,11 +25,28 @@ public class ItsCoronaTime extends Application {
         //starts the game
         //Arena arena = new Arena
 
+        Person person = new Person(50, 90, 50, 50);
+
+        Pane personPane = new Pane();
+
+        Image personImage = new Image(person.getImageName(), person.getWidth(), person.getHeight(), false, false);
+        ImageView imageView = new ImageView();
+        imageView.setImage(personImage);
+        imageView.setX(person.getX());
+        imageView.setY(person.getY());
+        personPane.getChildren().add(imageView);
+
+        StackPane stackPane = new StackPane();
+
+
+
         Pane pane = new Pane();
 
         pane.getChildren().add(new ImageView(startImage));
 
-        Scene scene = new Scene(pane, 1000, 1000);
+        stackPane.getChildren().addAll(pane);
+
+        Scene scene = new Scene(stackPane, 1000, 1000);
 
         primaryStage.setTitle("Its Corona Time");
         primaryStage.setScene(scene);
@@ -41,7 +60,44 @@ public class ItsCoronaTime extends Application {
                     System.out.println("Key pressed");
                     pane.getChildren().remove(startImage);
                     pane.getChildren().add(new ImageView(arenaImage));
+                    stackPane.getChildren().add(personPane);
                     startScreen = false;
+                }
+                if(event.getCode() == KeyCode.DOWN)
+                {
+                    if(person.getY() < 1000)
+                    {
+                        person.setY(person.getY()+10);
+                        imageView.setY(person.getY());
+                    }
+
+                }
+                if(event.getCode() == KeyCode.UP)
+                {
+                    if(person.getY() > 0)
+                    {
+                        person.setY(person.getY()-10);
+                        imageView.setY(person.getY());
+                    }
+
+                }
+                if(event.getCode() == KeyCode.LEFT)
+                {
+                    if(person.getX() > 0)
+                    {
+                        person.setX(person.getX()-10);
+                        imageView.setX(person.getX());
+                    }
+
+                }
+                if(event.getCode() == KeyCode.RIGHT)
+                {
+                    if(person.getX() < 1000)
+                    {
+                        person.setX(person.getX()+10);
+                        imageView.setX(person.getX());
+                    }
+
                 }
             }
         });
