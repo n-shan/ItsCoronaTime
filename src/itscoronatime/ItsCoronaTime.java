@@ -65,23 +65,39 @@ public class ItsCoronaTime extends Application {
                 }
                 if(event.getCode() == KeyCode.DOWN)
                 {
-                    person.setY((int) (imageView.getY()+10));
-                    imageView.setY(person.getY());
+                    if(person.getY() < 1000)
+                    {
+                        person.setY(person.getY()+10);
+                        imageView.setY(person.getY());
+                    }
+
                 }
                 if(event.getCode() == KeyCode.UP)
                 {
-                    person.setY((int) (imageView.getY()-10));
-                    imageView.setY(person.getY());
+                    if(person.getY() > 0)
+                    {
+                        person.setY(person.getY()-10);
+                        imageView.setY(person.getY());
+                    }
+
                 }
                 if(event.getCode() == KeyCode.LEFT)
                 {
-                    person.setX((int) (imageView.getX()-10));
-                    imageView.setX(person.getX());
+                    if(person.getX() > 0)
+                    {
+                        person.setX(person.getX()-10);
+                        imageView.setX(person.getX());
+                    }
+
                 }
                 if(event.getCode() == KeyCode.RIGHT)
                 {
-                    person.setX((int) (imageView.getX()+10));
-                    imageView.setX(person.getX());
+                    if(person.getX() < 1000)
+                    {
+                        person.setX(person.getX()+10);
+                        imageView.setX(person.getX());
+                    }
+
                 }
             }
         });

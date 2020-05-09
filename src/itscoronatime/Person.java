@@ -3,7 +3,7 @@ package itscoronatime;
 public class Person extends Entity {
     private int m_lives;
     private int m_score;
-    private String imageName = "image/PacMan.png";
+    private String imageName = "image/CoronaMan.png";
     private int m_x, m_y, m_width, m_height;
 
     public Person(int x, int y, int width, int height)
