@@ -10,6 +10,7 @@ public abstract class Entity {
     public void setVisibility(boolean isVisible) {
         this.isVisible = isVisible;
     }
+
     public int getXLocation() {
         return x;
     }

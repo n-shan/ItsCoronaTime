@@ -15,7 +15,6 @@ public class Coronavirus extends Entity {
         canDie = true;
     }
 
-
     public boolean isScared(Person person){
         return canDie;
     }

@@ -1,9 +1,8 @@
 package itscoronatime;
 
 public class Toiletpaper extends Entity {
-    String image = "image/Pellet.png";
-    boolean isCollected = false;
-
+    private String image = "image/Pellet.png";
+    private boolean isCollected = false;
     private int pointVal = 10;
 
     public Toiletpaper(int x, int y){
@@ -11,13 +10,13 @@ public class Toiletpaper extends Entity {
         setVisibility(true);
     }
 
-    public void collect(Person person){
+    public void collect(){
         setVisibility(false);
         isCollected = true;
 
     }
 
-    public String getImage() {
+    public String getImageName() {
         return image;
     }
 }
