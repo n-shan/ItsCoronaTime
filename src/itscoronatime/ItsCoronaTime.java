@@ -13,6 +13,13 @@ import javafx.stage.Stage;
 
 public class ItsCoronaTime extends Application {
 
+    private int moveSpeed = 10;
+
+    //creates an array of booleans that will return if there is a wall at x,y space
+    //size is determined by the total pixels of the arena dived by how many pixels person can move
+    private boolean[][] walls = new boolean[1000/moveSpeed][1000/moveSpeed];
+
+
     public static void main(String[] args) { launch(args); }
 
     //adds in all the different pictures
@@ -64,8 +71,8 @@ public class ItsCoronaTime extends Application {
         hazmatImageView4.setX(hazmatSuit4.getX());
         hazmatImageView4.setY(hazmatSuit4.getY());
         //add imageviews to plane
-        gamePane.getChildren().addAll(personImageView, hazmatImageView1,
-                hazmatImageView2, hazmatImageView3, hazmatImageView4);
+        gamePane.getChildren().addAll(hazmatImageView1,
+                hazmatImageView2, hazmatImageView3, hazmatImageView4, personImageView);
 
         StackPane stackPane = new StackPane();
 
@@ -96,16 +103,16 @@ public class ItsCoronaTime extends Application {
                 {
                     if(person.getY() < 1000)
                     {
-                        person.setLocation(person.getX(), person.getY()+10);
+                        person.setLocation(person.getX(), person.getY()+moveSpeed);
                         personImageView.setY(person.getY());
                     }
 
                 }
                 if(event.getCode() == KeyCode.UP)
                 {
-                    if(person.getY() > 0)
+                    if(person.getY()+person.getHeight() > 0)
                     {
-                        person.setLocation(person.getX(), person.getY()-10);
+                        person.setLocation(person.getX(), person.getY()-moveSpeed);
                         personImageView.setY(person.getY());
                     }
 
@@ -114,16 +121,16 @@ public class ItsCoronaTime extends Application {
                 {
                     if(person.getX() > 0)
                     {
-                        person.setLocation(person.getX()-10, person.getY());
+                        person.setLocation(person.getX()-moveSpeed, person.getY());
                         personImageView.setX(person.getX());
                     }
 
                 }
                 if(event.getCode() == KeyCode.RIGHT)
                 {
-                    if(person.getX() < 1000)
+                    if(person.getX()+person.getWidth() < 1000)
                     {
-                        person.setLocation(person.getX()+10, person.getY());
+                        person.setLocation(person.getX()+moveSpeed, person.getY());
                         personImageView.setX(person.getX());
                     }
 
