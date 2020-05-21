@@ -238,8 +238,7 @@ public class ItsCoronaTime extends Application {
                 }
                 if(event.getCode() == KeyCode.DOWN)
                 {
-                    if(walls[person.getX()/moveSpeed][(person.getY()+person.getHeight()+moveSpeed)/moveSpeed] == false &&
-                            walls[(person.getX()+person.getWidth())/moveSpeed][(person.getY()+person.getHeight()+moveSpeed)/moveSpeed] == false)
+                    if(canMove(person, "DOWN"))
                     {
                         person.setLocation(person.getX(), person.getY()+moveSpeed);
                         personImageView.setY(person.getY());
@@ -248,8 +247,7 @@ public class ItsCoronaTime extends Application {
                 }
                 else if(event.getCode() == KeyCode.UP)
                 {
-                    if(walls[person.getX()/moveSpeed][(person.getY()-moveSpeed)/moveSpeed] == false &&
-                            walls[(person.getX()+person.getWidth())/moveSpeed][(person.getY()-moveSpeed)/moveSpeed] == false)
+                    if(canMove(person, "UP"))
                     {
                         person.setLocation(person.getX(), person.getY()-moveSpeed);
                         personImageView.setY(person.getY());
@@ -258,8 +256,7 @@ public class ItsCoronaTime extends Application {
                 }
                 else if(event.getCode() == KeyCode.LEFT)
                 {
-                    if(walls[(person.getX()-moveSpeed)/moveSpeed][(person.getY())/moveSpeed] == false &&
-                            walls[(person.getX()-moveSpeed)/moveSpeed][(person.getY()+person.getHeight())/moveSpeed] == false)
+                    if(canMove(person, "LEFT"))
                     {
                         person.setLocation(person.getX()-moveSpeed, person.getY());
                         personImageView.setX(person.getX());
@@ -268,8 +265,7 @@ public class ItsCoronaTime extends Application {
                 }
                 else if(event.getCode() == KeyCode.RIGHT)
                 {
-                    if(walls[(person.getX()+person.getWidth()+moveSpeed)/moveSpeed][(person.getY())/moveSpeed] == false &&
-                            walls[(person.getX()+person.getWidth()+moveSpeed)/moveSpeed][(person.getY()+person.getHeight())/moveSpeed] == false)
+                    if(canMove(person, "RIGHT"))
                     {
                         person.setLocation(person.getX()+moveSpeed, person.getY());
                         personImageView.setX(person.getX());
