@@ -29,16 +29,117 @@ public class ItsCoronaTime extends Application {
     private Image arenaImage = new Image("image/CoronaTimeArenaTemplate.jpeg");
     private boolean startScreen = true;
 
+
+    //sets the walls for the arena
+    //the i is for the x coordinate
+    //the j is for the y coordinate
     public void setWalls()
     {
-        //sets the top area of the map to have walls
-        for(int i = 0; i < walls.length; ++i)
+        //sets the top area of the map to have walls(0)
+        for(int i = 0; i < 1000; i+=moveSpeed)
         {
-            for(int j = 0; j < 100/moveSpeed; ++j)
+            for(int j = 0; j <= 80; j+=moveSpeed)
             {
-                walls[i][j] = true;
+                walls[i/moveSpeed][j/moveSpeed] = true;
             }
         }
+
+        //walls for section 1
+        for(int i = 100; i <= 190; i+=moveSpeed)
+        {
+            for(int j = 150; j <= 190; j+=moveSpeed)
+            {
+                walls[i/moveSpeed][j/moveSpeed] = true;
+            }
+        }
+
+        //walls for section 2
+        for(int i = 280; i <= 400; i+=moveSpeed)
+        {
+            for(int j = 150; j <= 190; j+=moveSpeed)
+            {
+                walls[i/moveSpeed][j/moveSpeed] = true;
+            }
+        }
+
+        //walls for section 3
+        for(int i = 490; i <= 510; i+=moveSpeed)
+        {
+            for(int j = 80; j <= 190; j+=moveSpeed)
+            {
+                walls[i/moveSpeed][j/moveSpeed] = true;
+            }
+        }
+
+        //walls for section 4
+        for(int i = 590; i <= 730; i+=moveSpeed)
+        {
+            for(int j = 150; j <= 190; j+=moveSpeed)
+            {
+                walls[i/moveSpeed][j/moveSpeed] = true;
+            }
+        }
+
+        //walls for section 5
+        for(int i = 810; i <= 900; i+=moveSpeed)
+        {
+            for(int j = 150; j <= 190; j+=moveSpeed)
+            {
+                walls[i/moveSpeed][j/moveSpeed] = true;
+            }
+        }
+
+        //walls for section 5
+        for(int i = 810; i <= 900; i+=moveSpeed)
+        {
+            for(int j = 150; j <= 190; j+=moveSpeed)
+            {
+                walls[i/moveSpeed][j/moveSpeed] = true;
+            }
+        }
+
+        //walls for section 42
+        for(int i = 0; i <= 10; i+=moveSpeed)
+        {
+            for(int j = 80; j <= 300; j+=moveSpeed)
+            {
+                walls[i/moveSpeed][j/moveSpeed] = true;
+            }
+        }
+
+        //walls for section 46
+        for(int i = 990; i < 1000; i+=moveSpeed)
+        {
+            for(int j = 80; j <= 300; j+=moveSpeed)
+            {
+                walls[i/moveSpeed][j/moveSpeed] = true;
+            }
+        }
+    }
+
+    public boolean canMove(Entity entity, String direction)
+    {
+        if(direction == "DOWN")
+        {
+            return (walls[entity.getX()/moveSpeed][(entity.getY()+entity.getHeight()+moveSpeed)/moveSpeed] == false &&
+                    walls[(entity.getX()+entity.getWidth())/moveSpeed][(entity.getY()+entity.getHeight()+moveSpeed)/moveSpeed] == false);
+        }
+        if(direction == "UP")
+        {
+            return (walls[entity.getX()/moveSpeed][(entity.getY()-moveSpeed)/moveSpeed] == false &&
+                    walls[(entity.getX()+entity.getWidth())/moveSpeed][(entity.getY()-moveSpeed)/moveSpeed] == false);
+        }
+        if(direction == "LEFT")
+        {
+            return (walls[(entity.getX()-moveSpeed)/moveSpeed][(entity.getY())/moveSpeed] == false &&
+                    walls[(entity.getX()-moveSpeed)/moveSpeed][(entity.getY()+entity.getHeight())/moveSpeed] == false);
+        }
+        if(direction == "RIGHT")
+        {
+            return (walls[(entity.getX()+entity.getWidth()+moveSpeed)/moveSpeed][(entity.getY())/moveSpeed] == false &&
+                    walls[(entity.getX()+entity.getWidth()+moveSpeed)/moveSpeed][(entity.getY()+entity.getHeight())/moveSpeed] == false);
+        }
+        return false;
     }
 
     @Override
@@ -46,7 +147,7 @@ public class ItsCoronaTime extends Application {
 
         setWalls();
 
-        Person person = new Person(50, 90, 50, 50);
+        Person person = new Person(30, 90, 50, 50);
 
         Pane gamePane = new Pane();
 
@@ -146,7 +247,7 @@ public class ItsCoronaTime extends Application {
                 }
                 if(event.getCode() == KeyCode.DOWN)
                 {
-                    if(person.getY() < 1000)
+                    if(canMove(person, "DOWN"))
                     {
                         person.setLocation(person.getX(), person.getY()+moveSpeed);
                         personImageView.setY(person.getY());
@@ -155,7 +256,7 @@ public class ItsCoronaTime extends Application {
                 }
                 else if(event.getCode() == KeyCode.UP)
                 {
-                    if(person.getY()+person.getHeight() > 0 && walls[person.getX()/moveSpeed][person.getY()/moveSpeed] == false)
+                    if(canMove(person, "UP"))
                     {
                         person.setLocation(person.getX(), person.getY()-moveSpeed);
                         personImageView.setY(person.getY());
@@ -164,7 +265,7 @@ public class ItsCoronaTime extends Application {
                 }
                 else if(event.getCode() == KeyCode.LEFT)
                 {
-                    if(person.getX() > 0)
+                    if(canMove(person, "LEFT"))
                     {
                         person.setLocation(person.getX()-moveSpeed, person.getY());
                         personImageView.setX(person.getX());
@@ -173,13 +274,14 @@ public class ItsCoronaTime extends Application {
                 }
                 else if(event.getCode() == KeyCode.RIGHT)
                 {
-                    if(person.getX()+person.getWidth() < 1000)
+                    if(canMove(person, "RIGHT"))
                     {
                         person.setLocation(person.getX()+moveSpeed, person.getY());
                         personImageView.setX(person.getX());
                     }
 
                 }
+                System.out.println("X: " + person.getX() + " Y: " + person.getY());
             }
         });
 
