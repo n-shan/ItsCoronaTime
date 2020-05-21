@@ -29,14 +29,27 @@ public class ItsCoronaTime extends Application {
     private Image arenaImage = new Image("image/CoronaTimeArenaTemplate.jpeg");
     private boolean startScreen = true;
 
+
+    //sets the walls for the arena
+    //the i is for the x coordinate
+    //the j is for the y coordinate
     public void setWalls()
     {
-        //sets the top area of the map to have walls
-        for(int i = 0; i < walls.length; ++i)
+        //sets the top area of the map to have walls(0)
+        for(int i = 0; i < 1000; i+=moveSpeed)
         {
-            for(int j = 0; j < 100/moveSpeed; ++j)
+            for(int j = 0; j <= 80; j+=moveSpeed)
             {
-                walls[i][j] = true;
+                walls[i/moveSpeed][j/moveSpeed] = true;
+            }
+        }
+
+        //walls for section 1
+        for(int i = 100; i <= 190; i+=moveSpeed)
+        {
+            for(int j = 150; j <= 190; j+=moveSpeed)
+            {
+                walls[i/moveSpeed][j/moveSpeed] = true;
             }
         }
     }
@@ -46,7 +59,7 @@ public class ItsCoronaTime extends Application {
 
         setWalls();
 
-        Person person = new Person(50, 90, 50, 50);
+        Person person = new Person(30, 90, 50, 50);
 
         Pane gamePane = new Pane();
 
@@ -146,7 +159,8 @@ public class ItsCoronaTime extends Application {
                 }
                 if(event.getCode() == KeyCode.DOWN)
                 {
-                    if(person.getY() < 1000)
+                    if(walls[person.getX()/moveSpeed][(person.getY()+person.getHeight()+moveSpeed)/moveSpeed] == false &&
+                            walls[(person.getX()+person.getWidth())/moveSpeed][(person.getY()+person.getHeight()+moveSpeed)/moveSpeed] == false)
                     {
                         person.setLocation(person.getX(), person.getY()+moveSpeed);
                         personImageView.setY(person.getY());
@@ -155,7 +169,8 @@ public class ItsCoronaTime extends Application {
                 }
                 else if(event.getCode() == KeyCode.UP)
                 {
-                    if(person.getY()+person.getHeight() > 0 && walls[person.getX()/moveSpeed][person.getY()/moveSpeed] == false)
+                    if(walls[person.getX()/moveSpeed][(person.getY()-moveSpeed)/moveSpeed] == false &&
+                            walls[(person.getX()+person.getWidth())/moveSpeed][(person.getY()-moveSpeed)/moveSpeed] == false)
                     {
                         person.setLocation(person.getX(), person.getY()-moveSpeed);
                         personImageView.setY(person.getY());
@@ -164,7 +179,8 @@ public class ItsCoronaTime extends Application {
                 }
                 else if(event.getCode() == KeyCode.LEFT)
                 {
-                    if(person.getX() > 0)
+                    if(walls[(person.getX()-moveSpeed)/moveSpeed][(person.getY())/moveSpeed] == false &&
+                            walls[(person.getX()-moveSpeed)/moveSpeed][(person.getY()+person.getHeight())/moveSpeed] == false)
                     {
                         person.setLocation(person.getX()-moveSpeed, person.getY());
                         personImageView.setX(person.getX());
@@ -173,13 +189,15 @@ public class ItsCoronaTime extends Application {
                 }
                 else if(event.getCode() == KeyCode.RIGHT)
                 {
-                    if(person.getX()+person.getWidth() < 1000)
+                    if(walls[(person.getX()+person.getWidth()+moveSpeed)/moveSpeed][(person.getY())/moveSpeed] == false &&
+                            walls[(person.getX()+person.getWidth()+moveSpeed)/moveSpeed][(person.getY()+person.getHeight())/moveSpeed] == false)
                     {
                         person.setLocation(person.getX()+moveSpeed, person.getY());
                         personImageView.setX(person.getX());
                     }
 
                 }
+                System.out.println("X: " + person.getX() + " Y: " + person.getY());
             }
         });
 
