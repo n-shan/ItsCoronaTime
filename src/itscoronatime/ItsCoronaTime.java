@@ -52,6 +52,85 @@ public class ItsCoronaTime extends Application {
                 walls[i/moveSpeed][j/moveSpeed] = true;
             }
         }
+
+        //walls for section 2
+        for(int i = 280; i <= 400; i+=moveSpeed)
+        {
+            for(int j = 150; j <= 190; j+=moveSpeed)
+            {
+                walls[i/moveSpeed][j/moveSpeed] = true;
+            }
+        }
+
+        //walls for section 3
+        for(int i = 490; i <= 510; i+=moveSpeed)
+        {
+            for(int j = 80; j <= 190; j+=moveSpeed)
+            {
+                walls[i/moveSpeed][j/moveSpeed] = true;
+            }
+        }
+
+        //walls for section 4
+        for(int i = 590; i <= 730; i+=moveSpeed)
+        {
+            for(int j = 150; j <= 190; j+=moveSpeed)
+            {
+                walls[i/moveSpeed][j/moveSpeed] = true;
+            }
+        }
+
+        //walls for section 5
+        for(int i = 810; i <= 900; i+=moveSpeed)
+        {
+            for(int j = 150; j <= 190; j+=moveSpeed)
+            {
+                walls[i/moveSpeed][j/moveSpeed] = true;
+            }
+        }
+
+        //walls for section 5
+        for(int i = 810; i <= 900; i+=moveSpeed)
+        {
+            for(int j = 150; j <= 190; j+=moveSpeed)
+            {
+                walls[i/moveSpeed][j/moveSpeed] = true;
+            }
+        }
+
+        //walls for section 46
+        for(int i = 990; i < 1000; i+=moveSpeed)
+        {
+            for(int j = 80; j <= 300; j+=moveSpeed)
+            {
+                walls[i/moveSpeed][j/moveSpeed] = true;
+            }
+        }
+    }
+
+    public boolean canMove(Entity entity, String direction)
+    {
+        if(direction == "DOWN")
+        {
+            return (walls[entity.getX()/moveSpeed][(entity.getY()+entity.getHeight()+moveSpeed)/moveSpeed] == false &&
+                    walls[(entity.getX()+entity.getWidth())/moveSpeed][(entity.getY()+entity.getHeight()+moveSpeed)/moveSpeed] == false);
+        }
+        if(direction == "UP")
+        {
+            return (walls[entity.getX()/moveSpeed][(entity.getY()-moveSpeed)/moveSpeed] == false &&
+                    walls[(entity.getX()+entity.getWidth())/moveSpeed][(entity.getY()-moveSpeed)/moveSpeed] == false);
+        }
+        if(direction == "LEFT")
+        {
+            return (walls[(entity.getX()-moveSpeed)/moveSpeed][(entity.getY())/moveSpeed] == false &&
+                    walls[(entity.getX()-moveSpeed)/moveSpeed][(entity.getY()+entity.getHeight())/moveSpeed] == false);
+        }
+        if(direction == "RIGHT")
+        {
+            return (walls[(entity.getX()+entity.getWidth()+moveSpeed)/moveSpeed][(entity.getY())/moveSpeed] == false &&
+                    walls[(entity.getX()+entity.getWidth()+moveSpeed)/moveSpeed][(entity.getY()+entity.getHeight())/moveSpeed] == false);
+        }
+        return false;
     }
 
     @Override
