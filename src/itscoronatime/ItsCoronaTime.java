@@ -98,6 +98,15 @@ public class ItsCoronaTime extends Application {
             }
         }
 
+        //walls for section 42
+        for(int i = 0; i <= 10; i+=moveSpeed)
+        {
+            for(int j = 80; j <= 300; j+=moveSpeed)
+            {
+                walls[i/moveSpeed][j/moveSpeed] = true;
+            }
+        }
+
         //walls for section 46
         for(int i = 990; i < 1000; i+=moveSpeed)
         {
