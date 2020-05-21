@@ -7,15 +7,17 @@ public class Coronavirus extends Entity {
 
     public Coronavirus(int x, int y){
         setLocation(x,y);
+        setWidth(50);
+        setHeight(50);
         setVisibility(true);
     }
 
     //when hazmat suit is collected, allow virus to be killed
-    public void scare(Person person){
+    public void scare(){
         canDie = true;
     }
 
-    public boolean isScared(Person person){
+    public boolean isScared(){
         return canDie;
     }
 
@@ -24,7 +26,7 @@ public class Coronavirus extends Entity {
     }
 
     //hazmat suit is off, allow virus to kill person
-    public void kill(Person person){
+    public void kill(){
         canDie = false;
     }
 }
