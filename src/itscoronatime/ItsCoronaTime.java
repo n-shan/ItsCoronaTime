@@ -27,8 +27,22 @@ public class ItsCoronaTime extends Application {
     private Image arenaImage = new Image("image/CoronaTimeArenaTemplate.jpeg");
     private boolean startScreen = true;
 
+    public void setWalls()
+    {
+        //sets the top area of the map to have walls
+        for(int i = 0; i < walls.length; ++i)
+        {
+            for(int j = 0; j < 100/moveSpeed; ++j)
+            {
+                walls[i][j] = true;
+            }
+        }
+    }
+
     @Override
     public void start(Stage primaryStage) throws Exception {
+
+        setWalls();
 
         Person person = new Person(50, 90, 50, 50);
 
@@ -108,16 +122,16 @@ public class ItsCoronaTime extends Application {
                     }
 
                 }
-                if(event.getCode() == KeyCode.UP)
+                else if(event.getCode() == KeyCode.UP)
                 {
-                    if(person.getY()+person.getHeight() > 0)
+                    if(person.getY()+person.getHeight() > 0 && walls[person.getX()/moveSpeed][person.getY()/moveSpeed] == false)
                     {
                         person.setLocation(person.getX(), person.getY()-moveSpeed);
                         personImageView.setY(person.getY());
                     }
 
                 }
-                if(event.getCode() == KeyCode.LEFT)
+                else if(event.getCode() == KeyCode.LEFT)
                 {
                     if(person.getX() > 0)
                     {
@@ -126,7 +140,7 @@ public class ItsCoronaTime extends Application {
                     }
 
                 }
-                if(event.getCode() == KeyCode.RIGHT)
+                else if(event.getCode() == KeyCode.RIGHT)
                 {
                     if(person.getX()+person.getWidth() < 1000)
                     {
