@@ -15,6 +15,8 @@ public class ItsCoronaTime extends Application {
 
     private int moveSpeed = 10;
 
+
+
     //creates an array of booleans that will return if there is a wall at x,y space
     //size is determined by the total pixels of the arena dived by how many pixels person can move
     private boolean[][] walls = new boolean[1000/moveSpeed][1000/moveSpeed];
@@ -34,10 +36,39 @@ public class ItsCoronaTime extends Application {
 
         Pane gamePane = new Pane();
 
+        //create person
         Image personImage = new Image(person.getImageName(), person.getWidth(), person.getHeight(), false, false);
         ImageView personImageView = new ImageView(personImage);
         personImageView.setX(person.getX());
         personImageView.setY(person.getY());
+
+        //create coronaVirus
+        Coronavirus rona1 = new Coronavirus(400, 460);
+        Coronavirus rona2 = new Coronavirus(450, 460);
+        Coronavirus rona3 = new Coronavirus(500, 460);
+        Coronavirus rona4 = new Coronavirus(550, 460);
+        //create coronaVirus images
+        Image ronaImage1 = new Image(rona1.getImageName(), rona1.getWidth(), rona1.getHeight(), false, false);
+        Image ronaImage2 = new Image(rona2.getImageName(), rona2.getWidth(), rona2.getHeight(), false, false);
+        Image ronaImage3 = new Image(rona3.getImageName(), rona3.getWidth(), rona3.getHeight(), false, false);
+        Image ronaImage4 = new Image(rona4.getImageName(), rona4.getWidth(), rona4.getHeight(), false, false);
+        //create coronaVirus imageViewers
+        ImageView ronaImageView1 = new ImageView(ronaImage1);
+        ImageView ronaImageView2 = new ImageView(ronaImage2);
+        ImageView ronaImageView3 = new ImageView(ronaImage3);
+        ImageView ronaImageView4 = new ImageView(ronaImage4);
+        //set ImageView locations
+        ronaImageView1.setX(rona1.getX());
+        ronaImageView1.setY(rona1.getY());
+
+        ronaImageView2.setX(rona2.getX());
+        ronaImageView2.setY(rona2.getY());
+
+        ronaImageView3.setX(rona3.getX());
+        ronaImageView3.setY(rona3.getY());
+
+        ronaImageView4.setX(rona4.getX());
+        ronaImageView4.setY(rona4.getY());
 
         //create hazmatsuits
         HazmatSuit hazmatSuit1 = new HazmatSuit(40, 155);
@@ -71,8 +102,8 @@ public class ItsCoronaTime extends Application {
         hazmatImageView4.setX(hazmatSuit4.getX());
         hazmatImageView4.setY(hazmatSuit4.getY());
         //add imageviews to plane
-        gamePane.getChildren().addAll(hazmatImageView1,
-                hazmatImageView2, hazmatImageView3, hazmatImageView4, personImageView);
+        gamePane.getChildren().addAll(hazmatImageView1, hazmatImageView2, hazmatImageView3, hazmatImageView4,
+                ronaImageView1, ronaImageView2, ronaImageView3, ronaImageView4, personImageView);
 
         StackPane stackPane = new StackPane();
 
