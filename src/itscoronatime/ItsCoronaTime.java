@@ -185,6 +185,116 @@ public class ItsCoronaTime extends Application {
             }
         }
 
+        //walls for section 15
+        for(int i = 380; i <= 460; i+=moveSpeed)
+        {
+            for(int j = 430; j <= 440; j+=moveSpeed)
+            {
+                walls[i/moveSpeed][j/moveSpeed] = true;
+            }
+        }
+
+        //walls for section 16
+        for(int i = 380; i <= 390; i+=moveSpeed)
+        {
+            for(int j = 430; j <= 530; j+=moveSpeed)
+            {
+                walls[i/moveSpeed][j/moveSpeed] = true;
+            }
+        }
+
+        //walls for section 17
+        for(int i = 380; i <= 620; i+=moveSpeed)
+        {
+            for(int j = 530; j <= 530; j+=moveSpeed)
+            {
+                walls[i/moveSpeed][j/moveSpeed] = true;
+            }
+        }
+
+        //walls for section 18
+        for(int i = 610; i <= 620; i+=moveSpeed)
+        {
+            for(int j = 430; j <= 530; j+=moveSpeed)
+            {
+                walls[i/moveSpeed][j/moveSpeed] = true;
+            }
+        }
+
+        //walls for section 19
+        for(int i = 540; i <= 620; i+=moveSpeed)
+        {
+            for(int j = 430; j <= 440; j+=moveSpeed)
+            {
+                walls[i/moveSpeed][j/moveSpeed] = true;
+            }
+        }
+
+        //walls for section 20
+        //going to need to have some special way to allow
+        //corona virus to get through this wall but not person
+        for(int i = 470; i <= 530; i+=moveSpeed)
+        {
+            for(int j = 430; j <= 440; j+=moveSpeed)
+            {
+                walls[i/moveSpeed][j/moveSpeed] = true;
+            }
+        }
+
+        //walls for section 21
+        for(int i = 0; i <= 190; i+=moveSpeed)
+        {
+            for(int j = 520; j <= 620; j+=moveSpeed)
+            {
+                walls[i/moveSpeed][j/moveSpeed] = true;
+            }
+        }
+
+        //walls for section 22
+        for(int i = 280; i <= 300; i+=moveSpeed)
+        {
+            for(int j = 520; j <= 620; j+=moveSpeed)
+            {
+                walls[i/moveSpeed][j/moveSpeed] = true;
+            }
+        }
+
+        //walls for section 23
+        for(int i = 380; i <= 620; i+=moveSpeed)
+        {
+            for(int j = 600; j <= 620; j+=moveSpeed)
+            {
+                walls[i/moveSpeed][j/moveSpeed] = true;
+            }
+        }
+
+        //walls for section 24
+        for(int i = 490; i <= 510; i+=moveSpeed)
+        {
+            for(int j = 620; j <= 700; j+=moveSpeed)
+            {
+                walls[i/moveSpeed][j/moveSpeed] = true;
+            }
+        }
+
+        //walls for section 25
+        for(int i = 700; i <= 730; i+=moveSpeed)
+        {
+            for(int j = 520; j <= 620; j+=moveSpeed)
+            {
+                walls[i/moveSpeed][j/moveSpeed] = true;
+            }
+        }
+
+        //walls for section 26
+        for(int i = 810; i < 1000; i+=moveSpeed)
+        {
+            for(int j = 520; j <= 620; j+=moveSpeed)
+            {
+                walls[i/moveSpeed][j/moveSpeed] = true;
+            }
+        }
+
         //walls for section 42
         for(int i = 0; i <= 10; i+=moveSpeed)
         {
