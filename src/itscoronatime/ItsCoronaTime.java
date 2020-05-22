@@ -351,7 +351,6 @@ public class ItsCoronaTime extends Application {
             public void handle(KeyEvent event) {
                 if(startScreen)
                 {
-                    System.out.println("Key pressed");
                     pane.getChildren().remove(startImage);
                     pane.getChildren().add(new ImageView(arenaImage));
                     stackPane.getChildren().add(gamePane);
@@ -411,7 +410,7 @@ public class ItsCoronaTime extends Application {
             }
         });
 
-        Timeline virus = new Timeline(new KeyFrame(Duration.seconds(.5), new EventHandler<ActionEvent>() {
+        Timeline virusTimeline = new Timeline(new KeyFrame(Duration.seconds(.5), new EventHandler<ActionEvent>() {
 
             Random rand = new Random();
             int[] moveChoices = {moveSpeed, -moveSpeed};
@@ -460,8 +459,8 @@ public class ItsCoronaTime extends Application {
                 }
             }
         }));
-        virus.setCycleCount(Timeline.INDEFINITE);
-        virus.play();
+        virusTimeline.setCycleCount(Timeline.INDEFINITE);
+        virusTimeline.play();
 
     }
 }
