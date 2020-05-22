@@ -116,6 +116,69 @@ public class ItsCoronaTime extends Application {
             }
         }
 
+        //walls for section 8
+        for(int i = 280; i <= 400; i+=moveSpeed)
+        {
+            for(int j = 350; j <= 360; j+=moveSpeed)
+            {
+                walls[i/moveSpeed][j/moveSpeed] = true;
+            }
+        }
+
+        //walls for section 9
+        for(int i = 380; i <= 620; i+=moveSpeed)
+        {
+            for(int j = 260; j <= 280; j+=moveSpeed)
+            {
+                walls[i/moveSpeed][j/moveSpeed] = true;
+            }
+        }
+
+        //walls for section 10
+        for(int i = 490; i <= 510; i+=moveSpeed)
+        {
+            for(int j = 260; j <= 360; j+=moveSpeed)
+            {
+                walls[i/moveSpeed][j/moveSpeed] = true;
+            }
+        }
+
+        //walls for section 11
+        for(int i = 600; i <= 730; i+=moveSpeed)
+        {
+            for(int j = 350; j <= 360; j+=moveSpeed)
+            {
+                walls[i/moveSpeed][j/moveSpeed] = true;
+            }
+        }
+
+        //walls for section 12
+        for(int i = 700; i <= 730; i+=moveSpeed)
+        {
+            for(int j = 260; j <= 450; j+=moveSpeed)
+            {
+                walls[i/moveSpeed][j/moveSpeed] = true;
+            }
+        }
+
+        //walls for section 13
+        for(int i = 810; i < 1000; i+=moveSpeed)
+        {
+            for(int j = 350; j <= 450; j+=moveSpeed)
+            {
+                walls[i/moveSpeed][j/moveSpeed] = true;
+            }
+        }
+
+        //walls for section 14
+        for(int i = 0; i <= 190; i+=moveSpeed)
+        {
+            for(int j = 350; j <= 450; j+=moveSpeed)
+            {
+                walls[i/moveSpeed][j/moveSpeed] = true;
+            }
+        }
+
         //walls for section 42
         for(int i = 0; i <= 10; i+=moveSpeed)
         {
@@ -135,6 +198,7 @@ public class ItsCoronaTime extends Application {
         }
     }
 
+    //checks to see if given entity can move
     public boolean canMove(Entity entity, String direction)
     {
         if(direction == "DOWN")
@@ -309,8 +373,15 @@ public class ItsCoronaTime extends Application {
                 {
                     if(canMove(person, "LEFT"))
                     {
-                        person.setLocation(person.getX()-moveSpeed, person.getY());
+                        if(person.getX()-moveSpeed <= 0)
+                        {
+                            person.setLocation(930, person.getY());
+                        }
+                        else{
+                            person.setLocation(person.getX()-moveSpeed, person.getY());
+                        }
                         personImageView.setX(person.getX());
+
                     }
 
                 }
@@ -318,7 +389,14 @@ public class ItsCoronaTime extends Application {
                 {
                     if(canMove(person, "RIGHT"))
                     {
-                        person.setLocation(person.getX()+moveSpeed, person.getY());
+                        if(person.getX()+moveSpeed >= 940)
+                        {
+                            person.setLocation(0+moveSpeed, person.getY());
+                        }
+                        else
+                        {
+                            person.setLocation(person.getX()+moveSpeed, person.getY());
+                        }
                         personImageView.setX(person.getX());
                     }
 
