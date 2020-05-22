@@ -1,6 +1,9 @@
 package itscoronatime;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.application.Application;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
@@ -10,6 +13,9 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import javafx.util.Duration;
+
+import java.util.Random;
 
 public class ItsCoronaTime extends Application {
 
@@ -404,6 +410,58 @@ public class ItsCoronaTime extends Application {
                 System.out.println("X: " + person.getX() + " Y: " + person.getY());
             }
         });
+
+        Timeline virus = new Timeline(new KeyFrame(Duration.seconds(.5), new EventHandler<ActionEvent>() {
+
+            Random rand = new Random();
+            int[] moveChoices = {moveSpeed, -moveSpeed};
+            int randXInt, randYInt;
+
+            @Override
+            public void handle(ActionEvent event) {
+
+                if(!startScreen) {
+                    randXInt = rand.nextInt(2);
+                    randYInt = rand.nextInt(2);
+
+                    //if(!walls[rona1.getX() + moveChoices[randXInt]][rona1.getY() + moveChoices[randYInt]])
+                    if(true) {
+                        rona1.setLocation(rona1.getX() + moveChoices[randXInt], rona1.getY() + moveChoices[randYInt]);
+                        ronaImageView1.setX(rona1.getX());
+                        ronaImageView1.setY(rona1.getY());
+                    }
+
+                    randXInt = rand.nextInt(2);
+                    randYInt = rand.nextInt(2);
+
+                    if(true) {
+                        rona2.setLocation(rona2.getX() + moveChoices[randXInt], rona2.getY() + moveChoices[randYInt]);
+                        ronaImageView2.setX(rona2.getX());
+                        ronaImageView2.setY(rona2.getY());
+                    }
+
+                    randXInt = rand.nextInt(2);
+                    randYInt = rand.nextInt(2);
+
+                    if(true) {
+                        rona3.setLocation(rona3.getX() + moveChoices[randXInt], rona3.getY() + moveChoices[randYInt]);
+                        ronaImageView3.setX(rona3.getX());
+                        ronaImageView3.setY(rona3.getY());
+                    }
+
+                    randXInt = rand.nextInt(2);
+                    randYInt = rand.nextInt(2);
+
+                    if(true) {
+                        rona4.setLocation(rona4.getX() + moveChoices[randXInt], rona4.getY() + moveChoices[randYInt]);
+                        ronaImageView4.setX(rona4.getX());
+                        ronaImageView4.setY(rona4.getY());
+                    }
+                }
+            }
+        }));
+        virus.setCycleCount(Timeline.INDEFINITE);
+        virus.play();
 
     }
 }
