@@ -25,7 +25,7 @@ public class ItsCoronaTime extends Application {
 
     //creates an array of booleans that will return if there is a wall at x,y space
     //size is determined by the total pixels of the arena dived by how many pixels person can move
-    private boolean[][] walls = new boolean[1000/moveSpeed][1000/moveSpeed];
+    private boolean[][] walls = new boolean[1000/moveSpeed+1][1000/moveSpeed+1];
 
 
     public static void main(String[] args) { launch(args); }
@@ -41,8 +41,8 @@ public class ItsCoronaTime extends Application {
     //the j is for the y coordinate
     public void setWalls()
     {
-        //sets the top area of the map to have walls(0)
-        for(int i = 0; i < 1000; i+=moveSpeed)
+        //walls for section 0
+        for(int i = 0; i <= 1000; i+=moveSpeed)
         {
             for(int j = 0; j <= 80; j+=moveSpeed)
             {
@@ -168,7 +168,7 @@ public class ItsCoronaTime extends Application {
         }
 
         //walls for section 13
-        for(int i = 810; i < 1000; i+=moveSpeed)
+        for(int i = 810; i <= 1000; i+=moveSpeed)
         {
             for(int j = 350; j <= 450; j+=moveSpeed)
             {
@@ -287,9 +287,144 @@ public class ItsCoronaTime extends Application {
         }
 
         //walls for section 26
-        for(int i = 810; i < 1000; i+=moveSpeed)
+        for(int i = 810; i <= 1000; i+=moveSpeed)
         {
             for(int j = 520; j <= 620; j+=moveSpeed)
+            {
+                walls[i/moveSpeed][j/moveSpeed] = true;
+            }
+        }
+
+        //walls for section 27
+        for(int i = 100; i <= 190; i+=moveSpeed)
+        {
+            for(int j = 690; j <= 700; j+=moveSpeed)
+            {
+                walls[i/moveSpeed][j/moveSpeed] = true;
+            }
+        }
+
+        //walls for section 28
+        for(int i = 170; i <= 190; i+=moveSpeed)
+        {
+            for(int j = 690; j <= 780; j+=moveSpeed)
+            {
+                walls[i/moveSpeed][j/moveSpeed] = true;
+            }
+        }
+
+        //walls for section 29
+        for(int i = 280; i <= 400; i+=moveSpeed)
+        {
+            for(int j = 690; j <= 700; j+=moveSpeed)
+            {
+                walls[i/moveSpeed][j/moveSpeed] = true;
+            }
+        }
+
+        //walls for section 30
+        for(int i = 600; i <= 730; i+=moveSpeed)
+        {
+            for(int j = 690; j <= 700; j+=moveSpeed)
+            {
+                walls[i/moveSpeed][j/moveSpeed] = true;
+            }
+        }
+
+        //walls for section 31
+        for(int i = 810; i <= 830; i+=moveSpeed)
+        {
+            for(int j = 690; j <= 780; j+=moveSpeed)
+            {
+                walls[i/moveSpeed][j/moveSpeed] = true;
+            }
+        }
+
+        //walls for section 32
+        for(int i = 810; i <= 900; i+=moveSpeed)
+        {
+            for(int j = 690; j <= 700; j+=moveSpeed)
+            {
+                walls[i/moveSpeed][j/moveSpeed] = true;
+            }
+        }
+
+        //walls for section 33
+        for(int i = 920; i <= 1000; i+=moveSpeed)
+        {
+            for(int j = 770; j <= 780; j+=moveSpeed)
+            {
+                walls[i/moveSpeed][j/moveSpeed] = true;
+            }
+        }
+
+        //walls for section 34
+        for(int i = 0; i <= 80; i+=moveSpeed)
+        {
+            for(int j = 770; j <= 780; j+=moveSpeed)
+            {
+                walls[i/moveSpeed][j/moveSpeed] = true;
+            }
+        }
+
+        //walls for section 35
+        for(int i = 100; i <= 400; i+=moveSpeed)
+        {
+            for(int j = 860; j <= 870; j+=moveSpeed)
+            {
+                walls[i/moveSpeed][j/moveSpeed] = true;
+            }
+        }
+
+        //walls for section 36
+        for(int i = 280; i <= 300; i+=moveSpeed)
+        {
+            for(int j = 770; j <= 870; j+=moveSpeed)
+            {
+                walls[i/moveSpeed][j/moveSpeed] = true;
+            }
+        }
+
+        //walls for section 37
+        for(int i = 380; i <= 620; i+=moveSpeed)
+        {
+            for(int j = 770; j <= 780; j+=moveSpeed)
+            {
+                walls[i/moveSpeed][j/moveSpeed] = true;
+            }
+        }
+
+        //walls for section 38
+        for(int i = 490; i <= 510; i+=moveSpeed)
+        {
+            for(int j = 770; j <= 870; j+=moveSpeed)
+            {
+                walls[i/moveSpeed][j/moveSpeed] = true;
+            }
+        }
+
+        //walls for section 39
+        for(int i = 600; i <= 900; i+=moveSpeed)
+        {
+            for(int j = 860; j <= 870; j+=moveSpeed)
+            {
+                walls[i/moveSpeed][j/moveSpeed] = true;
+            }
+        }
+
+        //walls for section 40
+        for(int i = 700; i <= 730; i+=moveSpeed)
+        {
+            for(int j = 770; j <= 870; j+=moveSpeed)
+            {
+                walls[i/moveSpeed][j/moveSpeed] = true;
+            }
+        }
+
+        //walls for section 41
+        for(int i = 810; i <= 900; i+=moveSpeed)
+        {
+            for(int j = 260; j <= 280; j+=moveSpeed)
             {
                 walls[i/moveSpeed][j/moveSpeed] = true;
             }
@@ -304,8 +439,35 @@ public class ItsCoronaTime extends Application {
             }
         }
 
+        //walls for section 43
+        for(int i = 0; i <= 10; i+=moveSpeed)
+        {
+            for(int j = 620; j <= 890; j+=moveSpeed)
+            {
+                walls[i/moveSpeed][j/moveSpeed] = true;
+            }
+        }
+
+        //walls for section 44
+        for(int i = 0; i <= 1000; i+=moveSpeed)
+        {
+            for(int j = 940; j < 1000; j+=moveSpeed)
+            {
+                walls[i/moveSpeed][j/moveSpeed] = true;
+            }
+        }
+
+        //walls for section 45
+        for(int i = 990; i <= 1000; i+=moveSpeed)
+        {
+            for(int j = 620; j <= 890; j+=moveSpeed)
+            {
+                walls[i/moveSpeed][j/moveSpeed] = true;
+            }
+        }
+
         //walls for section 46
-        for(int i = 990; i < 1000; i+=moveSpeed)
+        for(int i = 990; i <= 1000; i+=moveSpeed)
         {
             for(int j = 80; j <= 300; j+=moveSpeed)
             {
@@ -490,7 +652,7 @@ public class ItsCoronaTime extends Application {
                     {
                         if(person.getX()-moveSpeed <= 0)
                         {
-                            person.setLocation(930, person.getY());
+                            person.setLocation(940, person.getY());
                         }
                         else{
                             person.setLocation(person.getX()-moveSpeed, person.getY());
@@ -504,7 +666,7 @@ public class ItsCoronaTime extends Application {
                 {
                     if(canMove(person, "RIGHT"))
                     {
-                        if(person.getX()+moveSpeed >= 940)
+                        if(person.getX()+moveSpeed >= 950)
                         {
                             person.setLocation(0+moveSpeed, person.getY());
                         }
