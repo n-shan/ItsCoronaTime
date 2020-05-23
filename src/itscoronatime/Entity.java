@@ -3,6 +3,7 @@ package itscoronatime;
 public abstract class Entity {
     private int x,y, width, height;
     private boolean isVisible;
+    private String m_direction;
 
     public boolean isVisible() {
         return isVisible;
@@ -34,4 +35,11 @@ public abstract class Entity {
     public void setHeight(int height) {
         this.height = height;
     }
+
+    public void setDirection(String direction)
+    {
+        m_direction = direction;
+    }
+
+    public String getDirection() { return m_direction; }
 }

@@ -529,6 +529,51 @@ public class ItsCoronaTime extends Application {
         return false;
     }
 
+    public void moveEntity(Entity entity)
+    {
+        if(entity.getDirection() == "RIGHT")
+        {
+            if(canMove(entity, "RIGHT"))
+            {
+                if(entity.getX()+moveSpeed >= 950)
+                {
+                    entity.setLocation(0+moveSpeed, entity.getY());
+                }
+                else
+                {
+                    entity.setLocation(entity.getX()+moveSpeed, entity.getY());
+                }
+            }
+        }
+        else if(entity.getDirection() == "LEFT")
+        {
+            if(canMove(entity, "LEFT"))
+            {
+                if(entity.getX()-moveSpeed <= 0)
+                {
+                    entity.setLocation(940, entity.getY());
+                }
+                else{
+                    entity.setLocation(entity.getX()-moveSpeed, entity.getY());
+                }
+            }
+        }
+        else if(entity.getDirection() == "DOWN")
+        {
+            if(canMove(entity, "DOWN"))
+            {
+                entity.setLocation(entity.getX(), entity.getY()+moveSpeed);
+            }
+        }
+        else if(entity.getDirection() == "UP")
+        {
+            if(canMove(entity, "UP"))
+            {
+                entity.setLocation(entity.getX(), entity.getY()-moveSpeed);
+            }
+        }
+    }
+
     @Override
     public void start(Stage primaryStage) throws Exception {
 
@@ -641,57 +686,34 @@ public class ItsCoronaTime extends Application {
                 }
                 if(event.getCode() == KeyCode.DOWN)
                 {
-                    if(canMove(person, "DOWN"))
-                    {
-                        person.setLocation(person.getX(), person.getY()+moveSpeed);
-                        personImageView.setY(person.getY());
-                    }
-
+                    person.setDirection("DOWN");
                 }
                 else if(event.getCode() == KeyCode.UP)
                 {
-                    if(canMove(person, "UP"))
-                    {
-                        person.setLocation(person.getX(), person.getY()-moveSpeed);
-                        personImageView.setY(person.getY());
-                    }
-
+                    person.setDirection("UP");
                 }
                 else if(event.getCode() == KeyCode.LEFT)
                 {
-                    if(canMove(person, "LEFT"))
-                    {
-                        if(person.getX()-moveSpeed <= 0)
-                        {
-                            person.setLocation(940, person.getY());
-                        }
-                        else{
-                            person.setLocation(person.getX()-moveSpeed, person.getY());
-                        }
-                        personImageView.setX(person.getX());
-
-                    }
-
+                    person.setDirection("LEFT");
                 }
                 else if(event.getCode() == KeyCode.RIGHT)
                 {
-                    if(canMove(person, "RIGHT"))
-                    {
-                        if(person.getX()+moveSpeed >= 950)
-                        {
-                            person.setLocation(0+moveSpeed, person.getY());
-                        }
-                        else
-                        {
-                            person.setLocation(person.getX()+moveSpeed, person.getY());
-                        }
-                        personImageView.setX(person.getX());
-                    }
-
+                    person.setDirection("RIGHT");
                 }
                 System.out.println("X: " + person.getX() + " Y: " + person.getY());
             }
         });
+
+        Timeline personTimeline = new Timeline(new KeyFrame(Duration.seconds(.1), new EventHandler<ActionEvent>() {
+            public void handle(ActionEvent event) {
+                //makes person move
+                moveEntity(person);
+                personImageView.setX(person.getX());
+                personImageView.setY(person.getY());
+            }
+        }));
+        personTimeline.setCycleCount(Timeline.INDEFINITE);
+        personTimeline.play();
 
         Timeline virusTimeline = new Timeline(new KeyFrame(Duration.seconds(.5), new EventHandler<ActionEvent>() {
 
@@ -705,6 +727,8 @@ public class ItsCoronaTime extends Application {
                 if(!startScreen) {
                     randXInt = rand.nextInt(2);
                     randYInt = rand.nextInt(2);
+
+
 
                     //if(!walls[rona1.getX() + moveChoices[randXInt]][rona1.getY() + moveChoices[randYInt]])
                     if(true) {

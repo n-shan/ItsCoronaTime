@@ -18,4 +18,6 @@ public class Person extends Entity {
     public int getLives() { return m_lives; }
 
     public int getScore() { return m_score; }
+
+
 }
