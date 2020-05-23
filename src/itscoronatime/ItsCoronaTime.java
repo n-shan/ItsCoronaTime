@@ -704,6 +704,17 @@ public class ItsCoronaTime extends Application {
             }
         });
 
+        Timeline personTimeline = new Timeline(new KeyFrame(Duration.seconds(.1), new EventHandler<ActionEvent>() {
+            public void handle(ActionEvent event) {
+                //makes person move
+                moveEntity(person);
+                personImageView.setX(person.getX());
+                personImageView.setY(person.getY());
+            }
+        }));
+        personTimeline.setCycleCount(Timeline.INDEFINITE);
+        personTimeline.play();
+
         Timeline virusTimeline = new Timeline(new KeyFrame(Duration.seconds(.5), new EventHandler<ActionEvent>() {
 
             Random rand = new Random();
@@ -717,10 +728,7 @@ public class ItsCoronaTime extends Application {
                     randXInt = rand.nextInt(2);
                     randYInt = rand.nextInt(2);
 
-                    //makes person move
-                    moveEntity(person);
-                    personImageView.setX(person.getX());
-                    personImageView.setY(person.getY());
+
 
                     //if(!walls[rona1.getX() + moveChoices[randXInt]][rona1.getY() + moveChoices[randYInt]])
                     if(true) {
