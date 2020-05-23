@@ -12,6 +12,9 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -600,9 +603,17 @@ public class ItsCoronaTime extends Application {
 
         hazmatImageView4.setX(hazmatSuit4.getX());
         hazmatImageView4.setY(hazmatSuit4.getY());
-        //add imageviews to plane
+
+
+        //create scoreboard
+        Text scoreBoard = new Text(425, 60, String.format("%06d", person.getScore()));
+        scoreBoard.setFill(Color.WHITE);
+        scoreBoard.setFont(Font.font(40));
+
+
+        //add imageviews and scoreboard to pane
         gamePane.getChildren().addAll(hazmatImageView1, hazmatImageView2, hazmatImageView3, hazmatImageView4,
-                ronaImageView1, ronaImageView2, ronaImageView3, ronaImageView4, personImageView);
+                ronaImageView1, ronaImageView2, ronaImageView3, ronaImageView4, personImageView, scoreBoard);
 
         StackPane stackPane = new StackPane();
 
