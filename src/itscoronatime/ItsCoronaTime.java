@@ -606,7 +606,7 @@ public class ItsCoronaTime extends Application {
 
 
         //create scoreboard
-        Text scoreBoard = new Text(425, 60, String.format("%06d", person.getScore()));
+        Text scoreBoard = new Text(430, 60, String.format("%06d", person.getScore()));
         scoreBoard.setFill(Color.WHITE);
         scoreBoard.setFont(Font.font(40));
 
