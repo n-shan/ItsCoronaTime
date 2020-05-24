@@ -5,10 +5,13 @@ public class Toiletpaper extends Entity {
     private boolean isCollected = false;
     private int pointVal = 10;
 
-    public Toiletpaper(int x, int y){
-        setLocation(x,y);
+    public Toiletpaper(){
+        setLocation(0,0);
         setVisibility(true);
+        setWidth(10);
+        setHeight(10);
     }
+
 
     public void collect(){
         setVisibility(false);
