@@ -948,8 +948,10 @@ public class ItsCoronaTime extends Application {
             {
                 for(int j = 0; j < pelletArr.length; ++j)
                 {
-                    if((p.getX()+i)/moveSpeed == pelletArr[j].getX() && (p.getY()+p.getHeight()+moveSpeed)/moveSpeed == pelletArr[j].getY())
+                    if(!pelletArr[j].hasBeenCollected() && (p.getX()+i)/moveSpeed == pelletArr[j].getX()/moveSpeed && (p.getY()+p.getHeight())/moveSpeed == pelletArr[j].getY()/moveSpeed)
                     {
+                        pelletArr[j].collect();
+                        pelletImageViewArr[j].setVisible(false);
                         return true;
                     }
                 }
@@ -962,8 +964,10 @@ public class ItsCoronaTime extends Application {
             {
                 for(int j = 0; j < pelletArr.length; ++j)
                 {
-                    if((p.getX()+i)/moveSpeed == pelletArr[j].getX() && (p.getY()-moveSpeed)/moveSpeed == pelletArr[j].getY())
+                    if(!pelletArr[j].hasBeenCollected() && (p.getX()+i)/moveSpeed == pelletArr[j].getX()/moveSpeed && (p.getY()-moveSpeed)/moveSpeed == pelletArr[j].getY()/moveSpeed)
                     {
+                        pelletArr[j].collect();
+                        pelletImageViewArr[j].setVisible(false);
                         return true;
                     }
                 }
@@ -976,20 +980,11 @@ public class ItsCoronaTime extends Application {
             {
                 for(int j = 0; j < pelletArr.length; ++j)
                 {
-                    for(int k = 0; k < pelletArr[j].getWidth(); ++k)
+                    if(!pelletArr[j].hasBeenCollected() && (p.getX()-moveSpeed)/moveSpeed == pelletArr[j].getX()/moveSpeed && (p.getY()+i)/moveSpeed == pelletArr[j].getY()/moveSpeed)
                     {
-                        for(int l = 0; l < pelletArr[j].getHeight(); ++l)
-                        {
-                            if(!pelletArr[j].hasBeenCollected() && (p.getX()-moveSpeed)/moveSpeed == pelletArr[j].getX() + k && (p.getY()+i)/moveSpeed == pelletArr[j].getY() + l)
-                            {
-                                pelletArr[j].collect();
-                                pelletImageViewArr[j].setVisible(false);
-
-                                System.out.println(j);
-
-                                return true;
-                            }
-                        }
+                        pelletArr[j].collect();
+                        pelletImageViewArr[j].setVisible(false);
+                        return true;
                     }
                 }
             }
@@ -1001,8 +996,10 @@ public class ItsCoronaTime extends Application {
             {
                 for(int j = 0; j < pelletArr.length; ++j)
                 {
-                    if((p.getX()+p.getWidth()+moveSpeed)/moveSpeed == pelletArr[j].getX() && (p.getY()+i)/moveSpeed == pelletArr[j].getY())
+                    if(!pelletArr[j].hasBeenCollected() && (p.getX()+p.getWidth())/moveSpeed == pelletArr[j].getX()/moveSpeed && (p.getY()+i)/moveSpeed == pelletArr[j].getY()/moveSpeed)
                     {
+                        pelletArr[j].collect();
+                        pelletImageViewArr[j].setVisible(false);
                         return true;
                     }
                 }
@@ -1021,7 +1018,6 @@ public class ItsCoronaTime extends Application {
             return;
         }
         p.incScore(10);
-
     }
 
     @Override
