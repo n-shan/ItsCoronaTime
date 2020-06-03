@@ -18,7 +18,9 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
+import java.sql.Time;
 import java.util.Random;
+import java.util.concurrent.TimeUnit;
 
 public class ItsCoronaTime extends Application {
 
@@ -591,13 +593,13 @@ public class ItsCoronaTime extends Application {
         //walls for section 20
         //going to need to have some special way to allow
         //corona virus to get through this wall but not person
-        for(int i = 470; i <= 530; i+=moveSpeed)
-        {
-            for(int j = 430; j <= 440; j+=moveSpeed)
-            {
-                walls[i/moveSpeed][j/moveSpeed] = true;
-            }
-        }
+//        for(int i = 470; i <= 530; i+=moveSpeed)
+//        {
+//            for(int j = 430; j <= 440; j+=moveSpeed)
+//            {
+//                walls[i/moveSpeed][j/moveSpeed] = true;
+//            }
+//        }
 
         //walls for section 21
         for(int i = 0; i <= 190; i+=moveSpeed)
@@ -974,9 +976,14 @@ public class ItsCoronaTime extends Application {
 
         //create coronaVirus
         Coronavirus rona1 = new Coronavirus(400, 460);
-        Coronavirus rona2 = new Coronavirus(450, 460);
-        Coronavirus rona3 = new Coronavirus(500, 460);
+        rona1.setDirection("RIGHT");
+        Coronavirus rona2 = new Coronavirus(475, 375);
+        rona2.setDirection("LEFT");
+        rona2.setIsInCage(false);
+        Coronavirus rona3 = new Coronavirus(475, 460);
+        rona3.setDirection("UP");
         Coronavirus rona4 = new Coronavirus(550, 460);
+        rona4.setDirection("LEFT");
         //create coronaVirus images
         Image ronaImage1 = new Image(rona1.getImageName(), rona1.getWidth(), rona1.getHeight(), false, false);
         Image ronaImage2 = new Image(rona2.getImageName(), rona2.getWidth(), rona2.getHeight(), false, false);
@@ -1098,59 +1105,214 @@ public class ItsCoronaTime extends Application {
         personTimeline.setCycleCount(Timeline.INDEFINITE);
         personTimeline.play();
 
-        Timeline virusTimeline = new Timeline(new KeyFrame(Duration.seconds(.5), new EventHandler<ActionEvent>() {
+        String[] directions = {"UP", "DOWN", "LEFT", "RIGHT"};
 
-            Random rand = new Random();
-            int[] moveChoices = {moveSpeed, -moveSpeed};
-            int randXInt, randYInt;
+        new Thread(() -> {
+            Timeline virusTimeline = new Timeline(new KeyFrame(Duration.seconds(.3), new EventHandler<ActionEvent>() {
 
-            @Override
-            public void handle(ActionEvent event) {
+                @Override
+                public void handle(ActionEvent event) {
+                    if(!startScreen) {
+                        if(canMove(rona2, rona2.getDirection())) {
+                            moveEntity(rona2);
+                            ronaImageView2.setX(rona2.getX());
+                            ronaImageView2.setY(rona2.getY());
+                        }
+                        else {
+                            while(!canMove(rona2, rona2.getDirection())) {
+                                Random rand = new Random();
+                                int randNum;
+                                randNum = rand.nextInt(4);
+                                rona2.setDirection(directions[randNum]);
+                            }
+                        }
 
-                if(!startScreen) {
-                    randXInt = rand.nextInt(2);
-                    randYInt = rand.nextInt(2);
-
-
-
-                    //if(!walls[rona1.getX() + moveChoices[randXInt]][rona1.getY() + moveChoices[randYInt]])
-                    if(true) {
-                        rona1.setLocation(rona1.getX() + moveChoices[randXInt], rona1.getY() + moveChoices[randYInt]);
-                        ronaImageView1.setX(rona1.getX());
-                        ronaImageView1.setY(rona1.getY());
-                    }
-
-                    randXInt = rand.nextInt(2);
-                    randYInt = rand.nextInt(2);
-
-                    if(true) {
-                        rona2.setLocation(rona2.getX() + moveChoices[randXInt], rona2.getY() + moveChoices[randYInt]);
-                        ronaImageView2.setX(rona2.getX());
-                        ronaImageView2.setY(rona2.getY());
-                    }
-
-                    randXInt = rand.nextInt(2);
-                    randYInt = rand.nextInt(2);
-
-                    if(true) {
-                        rona3.setLocation(rona3.getX() + moveChoices[randXInt], rona3.getY() + moveChoices[randYInt]);
-                        ronaImageView3.setX(rona3.getX());
-                        ronaImageView3.setY(rona3.getY());
-                    }
-
-                    randXInt = rand.nextInt(2);
-                    randYInt = rand.nextInt(2);
-
-                    if(true) {
-                        rona4.setLocation(rona4.getX() + moveChoices[randXInt], rona4.getY() + moveChoices[randYInt]);
-                        ronaImageView4.setX(rona4.getX());
-                        ronaImageView4.setY(rona4.getY());
                     }
                 }
-            }
-        }));
-        virusTimeline.setCycleCount(Timeline.INDEFINITE);
-        virusTimeline.play();
+            }));
+            virusTimeline.setCycleCount(Timeline.INDEFINITE);
+            virusTimeline.play();
+        }).start();
+
+        new Thread(() -> {
+            Timeline virusTimeline = new Timeline(new KeyFrame(Duration.seconds(.3), new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent event) {
+                    if(!startScreen) {
+                        if(rona3.getIsInCage()) {
+                            if(rona3.getY() > 375) {
+                                moveEntity(rona3);
+                                ronaImageView3.setX(rona3.getX());
+                                ronaImageView3.setY(rona3.getY());
+                            }
+                            else {
+                                rona3.setIsInCage(false);
+                                rona3.setDirection("RIGHT");
+                            }
+                        }
+                        else {
+                            if(canMove(rona3, rona3.getDirection())) {
+                                moveEntity(rona3);
+                                ronaImageView3.setX(rona3.getX());
+                                ronaImageView3.setY(rona3.getY());
+                            }
+                            else {
+                                while(!canMove(rona3, rona3.getDirection())) {
+                                    Random rand = new Random();
+                                    int randNum;
+                                    randNum = rand.nextInt(4);
+                                    rona3.setDirection(directions[randNum]);
+                                }
+                            }
+                        }
+                    }
+                }
+            }));
+            virusTimeline.setCycleCount(Timeline.INDEFINITE);
+            virusTimeline.play();
+        }).start();
+
+        new Thread(() -> {
+            Timeline virusTimeline = new Timeline(new KeyFrame(Duration.seconds(.3), new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent event) {
+                    if(!startScreen && !rona3.getIsInCage()) {
+                        if(rona1.getIsInCage()) {
+                            if(rona1.getX() < 475) {
+                                moveEntity(rona1);
+                                ronaImageView1.setX(rona1.getX());
+                                ronaImageView1.setY(rona1.getY());
+                            }
+                            else if(rona1.getX() >= 475 && rona1.getY() > 375) {
+                                rona1.setDirection("UP");
+                                moveEntity(rona1);
+                                ronaImageView1.setX(rona1.getX());
+                                ronaImageView1.setY(rona1.getY());
+                            }
+                            else {
+                                rona1.setIsInCage(false);
+                                rona1.setDirection("LEFT");
+                            }
+                        }
+                        else {
+                            if(canMove(rona1, rona1.getDirection())) {
+                                moveEntity(rona1);
+                                ronaImageView1.setX(rona1.getX());
+                                ronaImageView1.setY(rona1.getY());
+                            }
+                            else {
+                                while(!canMove(rona1, rona1.getDirection())) {
+                                    Random rand = new Random();
+                                    int randNum;
+                                    randNum = rand.nextInt(4);
+                                    rona1.setDirection(directions[randNum]);
+                                }
+                            }
+                        }
+                    }
+                }
+            }));
+            virusTimeline.setCycleCount(Timeline.INDEFINITE);
+            virusTimeline.play();
+        }).start();
+
+        new Thread(() -> {
+            Timeline virusTimeline = new Timeline(new KeyFrame(Duration.seconds(.3), new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent event) {
+                    if(!startScreen && !rona1.getIsInCage()) {
+                        if(rona4.getIsInCage()) {
+                            if(rona4.getX() > 475) {
+                                moveEntity(rona4);
+                                ronaImageView4.setX(rona4.getX());
+                                ronaImageView4.setY(rona4.getY());
+                            }
+                            else if(rona4.getX() <= 475 && rona4.getY() > 375) {
+                                rona4.setDirection("UP");
+                                moveEntity(rona4);
+                                ronaImageView4.setX(rona4.getX());
+                                ronaImageView4.setY(rona4.getY());
+                            }
+                            else {
+                                rona4.setIsInCage(false);
+                                rona4.setDirection("RIGHT");
+                            }
+                        }
+                        else {
+                            if(canMove(rona4, rona4.getDirection())) {
+                                moveEntity(rona4);
+                                ronaImageView4.setX(rona4.getX());
+                                ronaImageView4.setY(rona4.getY());
+                            }
+                            else {
+                                while(!canMove(rona4, rona4.getDirection())) {
+                                    Random rand = new Random();
+                                    int randNum;
+                                    randNum = rand.nextInt(4);
+                                    rona4.setDirection(directions[randNum]);
+                                }
+                            }
+                        }
+                    }
+                }
+            }));
+            virusTimeline.setCycleCount(Timeline.INDEFINITE);
+            virusTimeline.play();
+        }).start();
+
+//        Timeline virusTimeline = new Timeline(new KeyFrame(Duration.seconds(.5), new EventHandler<ActionEvent>() {
+//
+//            Random rand = new Random();
+//            int[] moveChoices = {moveSpeed, -moveSpeed};
+//            int randXInt, randYInt;
+//
+//            @Override
+//            public void handle(ActionEvent event) {
+//
+//                if(!startScreen) {
+//                    randXInt = rand.nextInt(2);
+//                    randYInt = rand.nextInt(2);
+//
+//
+//
+//                    //if(!walls[rona1.getX() + moveChoices[randXInt]][rona1.getY() + moveChoices[randYInt]])
+//                    if(true) {
+//                        rona1.setLocation(rona1.getX() + moveChoices[randXInt], rona1.getY() + moveChoices[randYInt]);
+//                        ronaImageView1.setX(rona1.getX());
+//                        ronaImageView1.setY(rona1.getY());
+//                    }
+//
+//                    randXInt = rand.nextInt(2);
+//                    randYInt = rand.nextInt(2);
+//
+//                    if(true) {
+//                        rona2.setLocation(rona2.getX() + moveChoices[randXInt], rona2.getY() + moveChoices[randYInt]);
+//                        ronaImageView2.setX(rona2.getX());
+//                        ronaImageView2.setY(rona2.getY());
+//                    }
+//
+//                    randXInt = rand.nextInt(2);
+//                    randYInt = rand.nextInt(2);
+//
+//                    if(true) {
+//                        rona3.setLocation(rona3.getX() + moveChoices[randXInt], rona3.getY() + moveChoices[randYInt]);
+//                        ronaImageView3.setX(rona3.getX());
+//                        ronaImageView3.setY(rona3.getY());
+//                    }
+//
+//                    randXInt = rand.nextInt(2);
+//                    randYInt = rand.nextInt(2);
+//
+//                    if(true) {
+//                        rona4.setLocation(rona4.getX() + moveChoices[randXInt], rona4.getY() + moveChoices[randYInt]);
+//                        ronaImageView4.setX(rona4.getX());
+//                        ronaImageView4.setY(rona4.getY());
+//                    }
+//                }
+//            }
+//        }));
+//        virusTimeline.setCycleCount(Timeline.INDEFINITE);
+//        virusTimeline.play();
 
     }
 }
