@@ -23,6 +23,9 @@ import java.util.Random;
 public class ItsCoronaTime extends Application {
 
     private int moveSpeed = 10;
+    private Toiletpaper pelletArr[] = new Toiletpaper[212];
+    private Image pelletImageArr[] = new Image[212];
+    private ImageView pelletImageViewArr[] = new ImageView[212];
 
 
 
@@ -43,8 +46,8 @@ public class ItsCoronaTime extends Application {
     //the i is for the x coordinate
     //the j is for the y coordinate
 
-    public void setPallets(ImageView arr[]){
-        //pallets for first top row
+    public void setpellets(ImageView arr[]){
+        //pellets for first top row
 
         arr[0].setX(50);
         arr[0].setY(110);
@@ -54,7 +57,7 @@ public class ItsCoronaTime extends Application {
             arr[i].setY(110);
         }
 
-        // pallets for other half of top row
+        // pellets for other half of top row
 
         arr[12].setX(940);
         arr[12].setY(110);
@@ -64,7 +67,7 @@ public class ItsCoronaTime extends Application {
             arr[i].setY(110);
         }
 
-        // pallets for next row
+        // pellets for next row
         arr[24].setX(50);
         arr[24].setY(220);
 
@@ -74,7 +77,7 @@ public class ItsCoronaTime extends Application {
 
         }
 
-        // pallets for half of next row
+        // pellets for half of next row
         arr[37].setX(940);
         arr[37].setY(220);
 
@@ -83,7 +86,7 @@ public class ItsCoronaTime extends Application {
             arr[i].setY(220);
         }
 
-        // pallets for left long column
+        // pellets for left long column
 
         arr[50].setX(225);
         arr[50].setY(259);
@@ -93,7 +96,7 @@ public class ItsCoronaTime extends Application {
             arr[i].setX(225);
         }
 
-        //pallets for right long column
+        //pellets for right long column
 
         arr[65].setX(765);
         arr[65].setY(259);
@@ -103,7 +106,7 @@ public class ItsCoronaTime extends Application {
             arr[i].setX(765);
         }
 
-        //pallets for first bottom row
+        //pellets for first bottom row
 
         arr[80].setX(50);
         arr[80].setY(650);
@@ -113,7 +116,7 @@ public class ItsCoronaTime extends Application {
             arr[i].setY(650);
         }
 
-        //pallets for first bottom row cont
+        //pellets for first bottom row cont
 
         arr[85].setX(265);
         arr[85].setY(650);
@@ -123,7 +126,7 @@ public class ItsCoronaTime extends Application {
             arr[i].setY(650);
         }
 
-        //pallets for first bottom row right
+        //pellets for first bottom row right
 
         arr[91].setX(940);
         arr[91].setY(650);
@@ -133,7 +136,7 @@ public class ItsCoronaTime extends Application {
             arr[i].setY(650);
         }
 
-        //pallets for first bottom row right continued
+        //pellets for first bottom row right continued
         arr[97].setX(730);
         arr[97].setY(650);
 
@@ -142,7 +145,7 @@ public class ItsCoronaTime extends Application {
             arr[i].setY(650);
         }
 
-        // pallets for section top left
+        // pellets for section top left
         arr[103].setX(50);
         arr[103].setY(298);
 
@@ -152,7 +155,7 @@ public class ItsCoronaTime extends Application {
 
         }
 
-        //pallets for section top right
+        //pellets for section top right
         arr[108].setX(940);
         arr[108].setY(298);
 
@@ -162,7 +165,7 @@ public class ItsCoronaTime extends Application {
 
         }
 
-        //pallets for top left bottom row
+        //pellets for top left bottom row
 
         arr[112].setX(85);
         arr[112].setY(300);
@@ -173,7 +176,7 @@ public class ItsCoronaTime extends Application {
 
         }
 
-        //pallets for top right bottom row
+        //pellets for top right bottom row
         arr[117].setX(905);
         arr[117].setY(300);
 
@@ -182,7 +185,7 @@ public class ItsCoronaTime extends Application {
             arr[i].setY(300);
         }
 
-        //pallet for top left middle section
+        //pellet for top left middle section
 
         arr[121].setX(225);
         arr[121].setY(145);
@@ -193,7 +196,7 @@ public class ItsCoronaTime extends Application {
 
         }
 
-        // pallets for top left right middle section
+        // pellets for top left right middle section
         arr[123].setX(435);
         arr[123].setY(145);
 
@@ -202,7 +205,7 @@ public class ItsCoronaTime extends Application {
             arr[i].setX(435);
         }
 
-        //pallets for top right left section
+        //pellets for top right left section
         arr[125].setX(555);
         arr[125].setY(145);
 
@@ -212,7 +215,7 @@ public class ItsCoronaTime extends Application {
 
         }
 
-        //pallets for top right middle section
+        //pellets for top right middle section
         arr[127].setX(765);
         arr[127].setY(145);
 
@@ -221,7 +224,7 @@ public class ItsCoronaTime extends Application {
             arr[i].setX(765);
         }
 
-        // pallets for left column inner section
+        // pellets for left column inner section
 
         arr[129].setX(330);
         arr[129].setY(262);
@@ -231,7 +234,7 @@ public class ItsCoronaTime extends Application {
             arr[i].setX(330);
         }
 
-        //pallets for right column inner section
+        //pellets for right column inner section
 
         arr[131].setX(660);
         arr[131].setY(262);
@@ -241,7 +244,7 @@ public class ItsCoronaTime extends Application {
             arr[i].setX(660);
         }
 
-        //pallets for left row inner section
+        //pellets for left row inner section
 
         arr[133].setX(330);
         arr[133].setY(301);
@@ -252,7 +255,7 @@ public class ItsCoronaTime extends Application {
 
         }
 
-        //pallets for right row inner section
+        //pellets for right row inner section
 
         arr[137].setX(621);
         arr[137].setY(301);
@@ -262,18 +265,18 @@ public class ItsCoronaTime extends Application {
             arr[i].setY(301);
         }
 
-        //pallets for super bottom row
+        //pellets for super bottom row
 
         arr[140].setX(50);
         arr[140].setY(900);
 
-        for(int i = 141; i < 164; i++){
+        for(int i = 141; i <= 164; i++){
             arr[i].setX(arr[i - 1].getX() + 39);
             arr[i].setY(900);
 
         }
 
-        // pallets for bottom middle row
+        // pellets for bottom middle row
         arr[165].setX(265);
         arr[165].setY(728);
 
@@ -282,7 +285,7 @@ public class ItsCoronaTime extends Application {
             arr[i].setY(728);
         }
 
-        // pallets for bottom left, left column
+        // pellets for bottom left, left column
         arr[178].setX(50);
         arr[178].setY(689);
 
@@ -291,7 +294,7 @@ public class ItsCoronaTime extends Application {
             arr[i].setY(arr[i - 1].getY() + 39);
         }
 
-        // pallets for bottom right, right column
+        // pellets for bottom right, right column
         arr[180].setX(940);
         arr[180].setY(689);
 
@@ -302,7 +305,7 @@ public class ItsCoronaTime extends Application {
         }
 
 
-        //pallets for bottom right, middle right row
+        //pellets for bottom right, middle right row
 
         arr[182].setX(905);
         arr[182].setY(728);
@@ -313,7 +316,7 @@ public class ItsCoronaTime extends Application {
 
         }
 
-        //pallets for bottom left, middle left row
+        //pellets for bottom left, middle left row
 
         arr[184].setX(85);
         arr[184].setY(728);
@@ -324,21 +327,21 @@ public class ItsCoronaTime extends Application {
 
         }
 
-        //single pallet bottom left
+        //single pellet bottom left
 
         arr[186].setX(120);
         arr[186].setY(767);
 
-        //single pallet bottome left middle
+        //single pellet bottome left middle
         arr[187].setX(340);
         arr[187].setY(767);
 
-        //single pallet bottom right middle
+        //single pellet bottom right middle
 
         arr[188].setX(655);
         arr[188].setY(767);
 
-        //single pallet bottom right right
+        //single pellet bottom right right
         arr[189].setX(870);
         arr[189].setY(767);
 
@@ -383,7 +386,7 @@ public class ItsCoronaTime extends Application {
             arr[i].setY(810);
         }
 
-        //single pallet bottom left
+        //single pellet bottom left
         arr[208].setX(50);
         arr[208].setY(850);
 
@@ -395,6 +398,14 @@ public class ItsCoronaTime extends Application {
 
         arr[211].setX(940);
         arr[211].setY(850);
+        
+        
+        //sets location for actual pellets
+        for(int i = 0; i < arr.length; ++i)
+        {
+            pelletArr[i].setLocation((int)arr[i].getX(), (int)arr[i].getY());
+        }
+        
     }
 
     public void setWalls()
@@ -848,7 +859,7 @@ public class ItsCoronaTime extends Application {
             }
             return true;
         }
-        if(direction == "UP")
+        else if(direction == "UP")
         {
             for(int i = 0; i <= entity.getWidth(); i+=moveSpeed)
             {
@@ -859,7 +870,7 @@ public class ItsCoronaTime extends Application {
             }
             return true;
         }
-        if(direction == "LEFT")
+        else if(direction == "LEFT")
         {
             for(int i = 0; i <= entity.getWidth(); i+=moveSpeed)
             {
@@ -870,7 +881,7 @@ public class ItsCoronaTime extends Application {
             }
             return true;
         }
-        if(direction == "RIGHT")
+        else if(direction == "RIGHT")
         {
             for(int i = 0; i <= entity.getWidth(); i+=moveSpeed)
             {
@@ -928,6 +939,90 @@ public class ItsCoronaTime extends Application {
             }
         }
     }
+    
+    public boolean canCollectToiletPaper(Person p)
+    {
+        if(p.getDirection() == "DOWN")
+        {
+            for(int i = 0; i <= p.getWidth(); i+=moveSpeed) //checks everywhere inside of person
+            {
+                for(int j = 0; j < pelletArr.length; ++j)
+                {
+                    if((p.getX()+i)/moveSpeed == pelletArr[j].getX() && (p.getY()+p.getHeight()+moveSpeed)/moveSpeed == pelletArr[j].getY())
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+        else if(p.getDirection() == "UP")
+        {
+            for(int i = 0; i <= p.getWidth(); i+=moveSpeed)
+            {
+                for(int j = 0; j < pelletArr.length; ++j)
+                {
+                    if((p.getX()+i)/moveSpeed == pelletArr[j].getX() && (p.getY()-moveSpeed)/moveSpeed == pelletArr[j].getY())
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+        else if(p.getDirection() == "LEFT")
+        {
+            for(int i = 0; i <= p.getWidth(); i+=moveSpeed)
+            {
+                for(int j = 0; j < pelletArr.length; ++j)
+                {
+                    for(int k = 0; k < pelletArr[j].getWidth(); ++k)
+                    {
+                        for(int l = 0; l < pelletArr[j].getHeight(); ++l)
+                        {
+                            if(!pelletArr[j].hasBeenCollected() && (p.getX()-moveSpeed)/moveSpeed == pelletArr[j].getX() + k && (p.getY()+i)/moveSpeed == pelletArr[j].getY() + l)
+                            {
+                                pelletArr[j].collect();
+                                pelletImageViewArr[j].setVisible(false);
+
+                                System.out.println(j);
+
+                                return true;
+                            }
+                        }
+                    }
+                }
+            }
+            return false;
+        }
+        else if(p.getDirection() == "RIGHT")
+        {
+            for(int i = 0; i <= p.getWidth(); i+=moveSpeed)
+            {
+                for(int j = 0; j < pelletArr.length; ++j)
+                {
+                    if((p.getX()+p.getWidth()+moveSpeed)/moveSpeed == pelletArr[j].getX() && (p.getY()+i)/moveSpeed == pelletArr[j].getY())
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+        return false;
+    }
+
+    public void collectToiletPaper(Person p)
+    {
+        //if it doesn't collect any
+        //toiletpaper then do nothing
+        if(!canCollectToiletPaper(p))
+        {
+            return;
+        }
+        p.incScore(10);
+
+    }
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -938,30 +1033,29 @@ public class ItsCoronaTime extends Application {
 
         Pane gamePane = new Pane();
 
-        //create pallet arrays to hold all toiletpaper (pallets)
+        //create pellet arrays to hold all toiletpaper (pellets)
 
-        Toiletpaper palletArr[] = new Toiletpaper[240];
-        Image palletImageArr[] = new Image[240];
-        ImageView palletImageViewArr[] = new ImageView[240];
+        
+
 
         //create ToiletPaper entities
 
-        for(int i = 0; i < palletArr.length; i++){
+        for(int i = 0; i < pelletArr.length; i++){
 
-            palletArr[i] = new Toiletpaper();
-            palletImageArr[i] = new Image(palletArr[i].getImageName(), palletArr[i].getWidth(), palletArr[i].getHeight(), false, false);
-            palletImageViewArr[i] = new ImageView(palletImageArr[i]);
+            pelletArr[i] = new Toiletpaper();
+            pelletImageArr[i] = new Image(pelletArr[i].getImageName(), pelletArr[i].getWidth(), pelletArr[i].getHeight(), false, false);
+            pelletImageViewArr[i] = new ImageView(pelletImageArr[i]);
 
-            palletImageViewArr[i].setX(palletArr[i].getX());
-            palletImageViewArr[i].setY(palletArr[i].getY());
+            pelletImageViewArr[i].setX(pelletArr[i].getX());
+            pelletImageViewArr[i].setY(pelletArr[i].getY());
         }
 
 
-        setPallets(palletImageViewArr);
+        setpellets(pelletImageViewArr);
 
 
-        for(int i = 0; i < palletImageViewArr.length; i++){
-            gamePane.getChildren().addAll(palletImageViewArr[i]);
+        for(int i = 0; i < pelletImageViewArr.length; i++){
+            gamePane.getChildren().addAll(pelletImageViewArr[i]);
         }
 
 
@@ -1093,6 +1187,12 @@ public class ItsCoronaTime extends Application {
                 moveEntity(person);
                 personImageView.setX(person.getX());
                 personImageView.setY(person.getY());
+
+                //checks to see if person is colleting toilet paper
+                collectToiletPaper(person);
+
+                //updates the scoreboard
+                scoreBoard.setText(String.format("%06d", person.getScore()));
             }
         }));
         personTimeline.setCycleCount(Timeline.INDEFINITE);

@@ -19,5 +19,6 @@ public class Person extends Entity {
 
     public int getScore() { return m_score; }
 
+    public void incScore(int amount) { m_score += amount; }
 
 }
