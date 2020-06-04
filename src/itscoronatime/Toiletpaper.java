@@ -22,4 +22,9 @@ public class Toiletpaper extends Entity {
     public String getImageName() {
         return image;
     }
+
+    public boolean hasBeenCollected()
+    {
+        return isCollected;
+    }
 }
