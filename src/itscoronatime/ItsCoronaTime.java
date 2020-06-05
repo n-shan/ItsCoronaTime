@@ -1045,7 +1045,6 @@ public class ItsCoronaTime extends Application {
         mediaPlayer.play();
 
 
-
         //create pellet arrays to hold all toiletpaper (pellets)
 
         
@@ -1198,6 +1197,14 @@ public class ItsCoronaTime extends Application {
                 System.out.println("X: " + person.getX() + " Y: " + person.getY());
             }
         });
+
+        Timeline musicTimeLine = new Timeline(new KeyFrame(Duration.seconds(60), new EventHandler<ActionEvent>() {
+            public void handle(ActionEvent event) {
+                mediaPlayer.play();
+            }
+        }));
+        musicTimeLine.setCycleCount(Timeline.INDEFINITE);
+        musicTimeLine.play();
 
         Timeline personTimeline = new Timeline(new KeyFrame(Duration.seconds(.1), new EventHandler<ActionEvent>() {
             public void handle(ActionEvent event) {
