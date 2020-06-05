@@ -12,12 +12,15 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
+import java.io.File;
 import java.sql.Time;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
@@ -1030,6 +1033,18 @@ public class ItsCoronaTime extends Application {
         Person person = new Person(30, 90, 50, 50);
 
         Pane gamePane = new Pane();
+
+        //play corona time music
+        String musicFile = "its-corona-time-music.mp3";
+
+        Media media = new Media(new File(musicFile).toURI().toString());
+
+
+        MediaPlayer mediaPlayer = new MediaPlayer(media);
+
+        mediaPlayer.play();
+
+
 
         //create pellet arrays to hold all toiletpaper (pellets)
 
