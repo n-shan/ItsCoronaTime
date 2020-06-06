@@ -16,6 +16,9 @@ public class HazmatSuit extends Entity {
     public void collect() {
         isCollected = true;
     }
+
+    public boolean hasBeenCollected() { return isCollected; }
+
     public String getImageName() {
         return image;
     }
