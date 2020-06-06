@@ -1203,7 +1203,7 @@ public class ItsCoronaTime extends Application {
 
 
         //create person
-        Person person = new Person(30, 90, 50, 50);
+        Person person = new Person(210, 90, 50, 50);
         Image personImage = new Image(person.getImageName(), person.getWidth(), person.getHeight(), false, false);
         ImageView personImageView = new ImageView(personImage);
         personImageView.setX(person.getX());
@@ -1353,6 +1353,12 @@ public class ItsCoronaTime extends Application {
                     //checks to see if person is collecting toilet paper
                     collectToiletPaper(person);
 
+                    //check to see if perosn is collecting hazmatsuit
+                    if(collectHazmat(person, hazmatSuit1, hazmatImageView1, hazmatSuit2, hazmatImageView2, hazmatSuit3, hazmatImageView3, hazmatSuit4, hazmatImageView4))
+                    {
+                        //implement hazmat powerup here
+                    }
+
                     //checks to see if person gets infected by virus
                     if(checkInfected(person, rona1, rona2, rona3, rona4))
                     {
@@ -1385,7 +1391,7 @@ public class ItsCoronaTime extends Application {
                         ronaImageView4.setY(rona4.getY());
 
                         //move person back to starting position
-                        person.setLocation(30, 90);
+                        person.setLocation(210, 90);
                         if(person.getLives() <= 0)
                         {
                             gamePane.getChildren().removeAll(hazmatImageView1, hazmatImageView2, hazmatImageView3, hazmatImageView4,
