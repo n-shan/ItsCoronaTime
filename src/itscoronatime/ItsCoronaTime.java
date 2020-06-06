@@ -1206,22 +1206,24 @@ public class ItsCoronaTime extends Application {
         musicTimeLine.setCycleCount(Timeline.INDEFINITE);
         musicTimeLine.play();
 
-        Timeline personTimeline = new Timeline(new KeyFrame(Duration.seconds(.1), new EventHandler<ActionEvent>() {
-            public void handle(ActionEvent event) {
-                //makes person move
-                moveEntity(person);
-                personImageView.setX(person.getX());
-                personImageView.setY(person.getY());
+        new Thread(() -> {
+            Timeline personTimeline = new Timeline(new KeyFrame(Duration.seconds(.1), new EventHandler<ActionEvent>() {
+                public void handle(ActionEvent event) {
+                    //makes person move
+                    moveEntity(person);
+                    personImageView.setX(person.getX());
+                    personImageView.setY(person.getY());
 
-                //checks to see if person is colleting toilet paper
-                collectToiletPaper(person);
+                    //checks to see if person is colleting toilet paper
+                    collectToiletPaper(person);
 
-                //updates the scoreboard
-                scoreBoard.setText(String.format("%06d", person.getScore()));
-            }
-        }));
-        personTimeline.setCycleCount(Timeline.INDEFINITE);
-        personTimeline.play();
+                    //updates the scoreboard
+                    scoreBoard.setText(String.format("%06d", person.getScore()));
+                }
+            }));
+            personTimeline.setCycleCount(Timeline.INDEFINITE);
+            personTimeline.play();
+        }).start();
 
         String[] directions = {"UP", "DOWN", "LEFT", "RIGHT"};
 
