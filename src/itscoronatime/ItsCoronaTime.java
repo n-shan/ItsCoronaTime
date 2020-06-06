@@ -951,13 +951,16 @@ public class ItsCoronaTime extends Application {
         {
             for(int i = 0; i <= p.getWidth(); i+=moveSpeed) //checks everywhere inside of person
             {
-                for(int j = 0; j < pelletArr.length; ++j)
+                for(int k = 0; k <= p.getHeight(); k+=moveSpeed)
                 {
-                    if(!pelletArr[j].hasBeenCollected() && (p.getX()+i)/moveSpeed == pelletArr[j].getX()/moveSpeed && (p.getY()+p.getHeight())/moveSpeed == pelletArr[j].getY()/moveSpeed)
+                    for(int j = 0; j < pelletArr.length; ++j)
                     {
-                        pelletArr[j].collect();
-                        pelletImageViewArr[j].setVisible(false);
-                        return true;
+                        if(!pelletArr[j].hasBeenCollected() && (p.getX()+i)/moveSpeed == pelletArr[j].getX()/moveSpeed && (p.getY()+k)/moveSpeed == pelletArr[j].getY()/moveSpeed)
+                        {
+                            pelletArr[j].collect();
+                            pelletImageViewArr[j].setVisible(false);
+                            return true;
+                        }
                     }
                 }
             }
@@ -981,7 +984,7 @@ public class ItsCoronaTime extends Application {
         }
         else if(p.getDirection() == "LEFT")
         {
-            for(int i = 0; i <= p.getWidth(); i+=moveSpeed)
+            for(int i = 0; i <= p.getHeight(); i+=moveSpeed)
             {
                 for(int j = 0; j < pelletArr.length; ++j)
                 {
@@ -997,15 +1000,18 @@ public class ItsCoronaTime extends Application {
         }
         else if(p.getDirection() == "RIGHT")
         {
-            for(int i = 0; i <= p.getWidth(); i+=moveSpeed)
+            for(int i = 0; i <= p.getHeight(); i+=moveSpeed)
             {
-                for(int j = 0; j < pelletArr.length; ++j)
+                for(int k = 0; k <= p.getWidth(); k+=moveSpeed)
                 {
-                    if(!pelletArr[j].hasBeenCollected() && (p.getX()+p.getWidth())/moveSpeed == pelletArr[j].getX()/moveSpeed && (p.getY()+i)/moveSpeed == pelletArr[j].getY()/moveSpeed)
+                    for(int j = 0; j < pelletArr.length; ++j)
                     {
-                        pelletArr[j].collect();
-                        pelletImageViewArr[j].setVisible(false);
-                        return true;
+                        if(!pelletArr[j].hasBeenCollected() && (p.getX()+k)/moveSpeed == pelletArr[j].getX()/moveSpeed && (p.getY()+i)/moveSpeed == pelletArr[j].getY()/moveSpeed)
+                        {
+                            pelletArr[j].collect();
+                            pelletImageViewArr[j].setVisible(false);
+                            return true;
+                        }
                     }
                 }
             }
@@ -1149,10 +1155,15 @@ public class ItsCoronaTime extends Application {
         scoreBoard.setFill(Color.WHITE);
         scoreBoard.setFont(Font.font(40));
 
+        //display lives
+        Text displayLives = new Text(5, 985, "Lives: " + Integer.toString(person.getLives()));
+        displayLives.setFill(Color.WHITE);
+        displayLives.setFont(Font.font(40));
+
 
         //add imageviews and scoreboard to pane
         gamePane.getChildren().addAll(hazmatImageView1, hazmatImageView2, hazmatImageView3, hazmatImageView4,
-                ronaImageView1, ronaImageView2, ronaImageView3, ronaImageView4, personImageView, scoreBoard);
+                ronaImageView1, ronaImageView2, ronaImageView3, ronaImageView4, personImageView, scoreBoard, displayLives);
 
         StackPane stackPane = new StackPane();
 
@@ -1206,22 +1217,24 @@ public class ItsCoronaTime extends Application {
         musicTimeLine.setCycleCount(Timeline.INDEFINITE);
         musicTimeLine.play();
 
-        Timeline personTimeline = new Timeline(new KeyFrame(Duration.seconds(.1), new EventHandler<ActionEvent>() {
-            public void handle(ActionEvent event) {
-                //makes person move
-                moveEntity(person);
-                personImageView.setX(person.getX());
-                personImageView.setY(person.getY());
+        new Thread(() -> {
+            Timeline personTimeline = new Timeline(new KeyFrame(Duration.seconds(.1), new EventHandler<ActionEvent>() {
+                public void handle(ActionEvent event) {
+                    //makes person move
+                    moveEntity(person);
+                    personImageView.setX(person.getX());
+                    personImageView.setY(person.getY());
 
-                //checks to see if person is colleting toilet paper
-                collectToiletPaper(person);
+                    //checks to see if person is colleting toilet paper
+                    collectToiletPaper(person);
 
-                //updates the scoreboard
-                scoreBoard.setText(String.format("%06d", person.getScore()));
-            }
-        }));
-        personTimeline.setCycleCount(Timeline.INDEFINITE);
-        personTimeline.play();
+                    //updates the scoreboard
+                    scoreBoard.setText(String.format("%06d", person.getScore()));
+                }
+            }));
+            personTimeline.setCycleCount(Timeline.INDEFINITE);
+            personTimeline.play();
+        }).start();
 
         String[] directions = {"UP", "DOWN", "LEFT", "RIGHT"};
 
