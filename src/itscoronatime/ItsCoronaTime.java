@@ -32,6 +32,7 @@ public class ItsCoronaTime extends Application {
     private Image pelletImageArr[] = new Image[212];
     private ImageView pelletImageViewArr[] = new ImageView[212];
 
+    private final double gameTickSpeed = 0.1;
 
 
     //creates an array of booleans that will return if there is a wall at x,y space
@@ -1224,7 +1225,7 @@ public class ItsCoronaTime extends Application {
         musicTimeLine.play();
 
         new Thread(() -> {
-            Timeline personTimeline = new Timeline(new KeyFrame(Duration.seconds(.1), new EventHandler<ActionEvent>() {
+            Timeline personTimeline = new Timeline(new KeyFrame(Duration.seconds(gameTickSpeed), new EventHandler<ActionEvent>() {
                 public void handle(ActionEvent event) {
                     //makes person move
                     moveEntity(person);
@@ -1245,7 +1246,7 @@ public class ItsCoronaTime extends Application {
         String[] directions = {"UP", "DOWN", "LEFT", "RIGHT"};
 
         new Thread(() -> {
-            Timeline virusTimeline = new Timeline(new KeyFrame(Duration.seconds(.3), new EventHandler<ActionEvent>() {
+            Timeline virusTimeline = new Timeline(new KeyFrame(Duration.seconds(gameTickSpeed), new EventHandler<ActionEvent>() {
 
                 @Override
                 public void handle(ActionEvent event) {
@@ -1272,7 +1273,7 @@ public class ItsCoronaTime extends Application {
         }).start();
 
         new Thread(() -> {
-            Timeline virusTimeline = new Timeline(new KeyFrame(Duration.seconds(.3), new EventHandler<ActionEvent>() {
+            Timeline virusTimeline = new Timeline(new KeyFrame(Duration.seconds(gameTickSpeed), new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
                     if(!startScreen) {
@@ -1310,7 +1311,7 @@ public class ItsCoronaTime extends Application {
         }).start();
 
         new Thread(() -> {
-            Timeline virusTimeline = new Timeline(new KeyFrame(Duration.seconds(.3), new EventHandler<ActionEvent>() {
+            Timeline virusTimeline = new Timeline(new KeyFrame(Duration.seconds(gameTickSpeed), new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
                     if(!startScreen && !rona3.getIsInCage()) {
@@ -1354,7 +1355,7 @@ public class ItsCoronaTime extends Application {
         }).start();
 
         new Thread(() -> {
-            Timeline virusTimeline = new Timeline(new KeyFrame(Duration.seconds(.3), new EventHandler<ActionEvent>() {
+            Timeline virusTimeline = new Timeline(new KeyFrame(Duration.seconds(gameTickSpeed), new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
                     if(!startScreen && !rona1.getIsInCage()) {
