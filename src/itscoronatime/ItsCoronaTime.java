@@ -21,9 +21,7 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 
 import java.io.File;
-import java.sql.Time;
 import java.util.Random;
-import java.util.concurrent.TimeUnit;
 
 public class ItsCoronaTime extends Application {
 
@@ -31,7 +29,6 @@ public class ItsCoronaTime extends Application {
     private Toiletpaper pelletArr[] = new Toiletpaper[212];
     private Image pelletImageArr[] = new Image[212];
     private ImageView pelletImageViewArr[] = new ImageView[212];
-
     private final double gameTickSpeed = 0.1;
 
 
@@ -45,6 +42,7 @@ public class ItsCoronaTime extends Application {
     //adds in all the different pictures
     private Image startImage = new Image("image/StartScreen.png");
     private Image arenaImage = new Image("image/CoronaTimeArenaTemplate.jpeg");
+    private Image gameOverImage = new Image("image/GameOverScreen.png");
     private boolean startScreen = true;
 
 
@@ -952,7 +950,7 @@ public class ItsCoronaTime extends Application {
         {
             for(int i = 0; i < p.getWidth(); i+=moveSpeed) //checks everywhere inside of person
             {
-                for(int k = 0; k <= p.getHeight(); k+=moveSpeed)
+                for(int k = 0; k < p.getHeight(); k+=moveSpeed)
                 {
                     for(int j = 0; j < pelletArr.length; ++j)
                     {
@@ -1038,12 +1036,48 @@ public class ItsCoronaTime extends Application {
         p.incScore(10);
     }
 
+    public boolean isInfected(Person p, Coronavirus c)
+    {
+        for(int i = 0; i <= p.getHeight(); i+=moveSpeed)
+        {
+            for(int j = 0; j <= p.getWidth(); j+=moveSpeed)
+            {
+                for(int i2 = 0; i2 <= c.getHeight(); i2+=moveSpeed)
+                {
+                    for(int j2 = 0; j2 <= c.getWidth(); j2+=moveSpeed)
+                    {
+                        if((p.getX()+j)/moveSpeed == (c.getX()+i2)/moveSpeed && (p.getY()+j)/moveSpeed == (c.getY()+j2)/moveSpeed)
+                        {
+                            return true;
+                        }
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+
+
+    public boolean checkInfected(Person p, Coronavirus c1, Coronavirus c2, Coronavirus c3, Coronavirus c4)
+    {
+        if(isInfected(p, c1))
+            return true;
+        if(isInfected(p, c2))
+            return true;
+        if(isInfected(p, c3))
+            return true;
+        if(isInfected(p, c4))
+            return true;
+        return false;
+    }
+
     @Override
     public void start(Stage primaryStage) throws Exception {
 
         setWalls();
 
-        Person person = new Person(30, 90, 50, 50);
+
 
         Pane gamePane = new Pane();
 
@@ -1086,6 +1120,7 @@ public class ItsCoronaTime extends Application {
 
 
         //create person
+        Person person = new Person(30, 90, 50, 50);
         Image personImage = new Image(person.getImageName(), person.getWidth(), person.getHeight(), false, false);
         ImageView personImageView = new ImageView(personImage);
         personImageView.setX(person.getX());
@@ -1163,7 +1198,7 @@ public class ItsCoronaTime extends Application {
         scoreBoard.setFont(Font.font(40));
 
         //display lives
-        Text displayLives = new Text(5, 985, "Lives: " + Integer.toString(person.getLives()));
+        Text displayLives = new Text(5, 985, "Lives: " + person.getLives());
         displayLives.setFill(Color.WHITE);
         displayLives.setFont(Font.font(40));
 
@@ -1232,8 +1267,52 @@ public class ItsCoronaTime extends Application {
                     personImageView.setX(person.getX());
                     personImageView.setY(person.getY());
 
-                    //checks to see if person is colleting toilet paper
+                    //checks to see if person is collecting toilet paper
                     collectToiletPaper(person);
+
+                    //checks to see if person gets infected by virus
+                    if(checkInfected(person, rona1, rona2, rona3, rona4))
+                    {
+                        person.decLives();
+                        displayLives.setText("Lives: " + person.getLives());
+
+                        //move coronaVirus back to cage
+                        rona1.setLocation(400, 460);
+                        rona1.setDirection("RIGHT");
+                        rona1.setIsInCage(true);
+                        ronaImageView1.setX(rona1.getX());
+                        ronaImageView1.setY(rona1.getY());
+
+                        rona2.setLocation(475, 375);
+                        rona2.setDirection("LEFT");
+                        rona2.setIsInCage(true);
+                        ronaImageView2.setX(rona2.getX());
+                        ronaImageView2.setY(rona2.getY());
+
+                        rona3.setLocation(475, 375);
+                        rona3.setDirection("UP");
+                        rona3.setIsInCage(true);
+                        ronaImageView3.setX(rona3.getX());
+                        ronaImageView3.setY(rona3.getY());
+
+                        rona4.setLocation(550, 460);
+                        rona4.setDirection("LEFT");
+                        rona4.setIsInCage(true);
+                        ronaImageView4.setX(rona4.getX());
+                        ronaImageView4.setY(rona4.getY());
+
+                        //move person back to starting position
+                        person.setLocation(30, 90);
+                        if(person.getLives() <= 0)
+                        {
+                            gamePane.getChildren().removeAll(hazmatImageView1, hazmatImageView2, hazmatImageView3, hazmatImageView4,
+                                    ronaImageView1, ronaImageView2, ronaImageView3, ronaImageView4, personImageView, scoreBoard, displayLives);
+                            for(int i = 0; i < pelletImageViewArr.length; i++){
+                                gamePane.getChildren().removeAll(pelletImageViewArr[i]);
+                            }
+                            pane.getChildren().add(new ImageView(gameOverImage));
+                        }
+                    }
 
                     //updates the scoreboard
                     scoreBoard.setText(String.format("%06d", person.getScore()));
