@@ -1036,6 +1036,89 @@ public class ItsCoronaTime extends Application {
         p.incScore(10);
     }
 
+    public boolean canCollectHazmat(Person p, HazmatSuit h, ImageView hiv)
+    {
+        if(p.getDirection() == "DOWN")
+        {
+            for(int i = 0; i < p.getWidth(); i+=moveSpeed) //checks everywhere inside of person
+            {
+                for(int k = 0; k < p.getHeight(); k+=moveSpeed)
+                {
+                    if(!h.hasBeenCollected() && (p.getX()+i)/moveSpeed == h.getX()/moveSpeed && (p.getY()+k)/moveSpeed == h.getY()/moveSpeed)
+                    {
+                        h.collect();
+                        hiv.setVisible(false);
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+        else if(p.getDirection() == "UP")
+        {
+            for(int i = 0; i < p.getWidth(); i+=moveSpeed)
+            {
+                for(int k = 0; k <= p.getHeight()+moveSpeed; k+=moveSpeed)
+                {
+                    if(!h.hasBeenCollected() && (p.getX()+i)/moveSpeed == h.getX()/moveSpeed && (p.getY()+p.getHeight()-k)/moveSpeed == h.getY()/moveSpeed)
+                    {
+                        h.collect();
+                        hiv.setVisible(false);
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+        else if(p.getDirection() == "LEFT")
+        {
+            for(int i = 0; i < p.getHeight(); i+=moveSpeed)
+            {
+                for(int k = 0; k <= p.getWidth()+moveSpeed; k+=moveSpeed)
+                {
+                    if(!h.hasBeenCollected() && (p.getX()+p.getWidth()-k)/moveSpeed == h.getX()/moveSpeed && (p.getY()+i)/moveSpeed == h.getY()/moveSpeed)
+                    {
+                        h.collect();
+                        hiv.setVisible(false);
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+        else if(p.getDirection() == "RIGHT")
+        {
+            for(int i = 0; i < p.getHeight(); i+=moveSpeed)
+            {
+                for(int k = 0; k <= p.getWidth(); k+=moveSpeed)
+                {
+                    if(!h.hasBeenCollected() && (p.getX()+k)/moveSpeed == h.getX()/moveSpeed && (p.getY()+i)/moveSpeed == h.getY()/moveSpeed)
+                    {
+                        h.collect();
+                        hiv.setVisible(false);
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+        return false;
+    }
+
+    public boolean collectHazmat(Person p, HazmatSuit h1, ImageView hiv1, HazmatSuit h2, ImageView hiv2, HazmatSuit h3, ImageView hiv3, HazmatSuit h4, ImageView hiv4)
+    {
+        if(canCollectHazmat(p, h1, hiv1))
+            return true;
+        if(canCollectHazmat(p, h2, hiv2))
+            return true;
+        if(canCollectHazmat(p, h3, hiv3))
+            return true;
+        if(canCollectHazmat(p, h4, hiv4))
+            return true;
+
+        return false;
+    }
+
     public boolean isInfected(Person p, Coronavirus c)
     {
         for(int i = 0; i <= p.getHeight(); i+=moveSpeed)
