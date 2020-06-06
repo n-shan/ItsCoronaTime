@@ -42,6 +42,7 @@ public class ItsCoronaTime extends Application {
     //adds in all the different pictures
     private Image startImage = new Image("image/StartScreen.png");
     private Image arenaImage = new Image("image/CoronaTimeArenaTemplate.jpeg");
+    private Image gameOverImage = new Image("image/GameOverScreen.png");
     private boolean startScreen = true;
 
 
@@ -1309,7 +1310,7 @@ public class ItsCoronaTime extends Application {
                             for(int i = 0; i < pelletImageViewArr.length; i++){
                                 gamePane.getChildren().removeAll(pelletImageViewArr[i]);
                             }
-                            pane.getChildren().add(new ImageView(arenaImage));
+                            pane.getChildren().add(new ImageView(gameOverImage));
                         }
                     }
 
