@@ -1304,7 +1304,12 @@ public class ItsCoronaTime extends Application {
                         person.setLocation(30, 90);
                         if(person.getLives() <= 0)
                         {
-                            
+                            gamePane.getChildren().removeAll(hazmatImageView1, hazmatImageView2, hazmatImageView3, hazmatImageView4,
+                                    ronaImageView1, ronaImageView2, ronaImageView3, ronaImageView4, personImageView, scoreBoard, displayLives);
+                            for(int i = 0; i < pelletImageViewArr.length; i++){
+                                gamePane.getChildren().removeAll(pelletImageViewArr[i]);
+                            }
+                            pane.getChildren().add(new ImageView(arenaImage));
                         }
                     }
 
