@@ -951,13 +951,16 @@ public class ItsCoronaTime extends Application {
         {
             for(int i = 0; i <= p.getWidth(); i+=moveSpeed) //checks everywhere inside of person
             {
-                for(int j = 0; j < pelletArr.length; ++j)
+                for(int k = 0; k <= p.getHeight(); k+=moveSpeed)
                 {
-                    if(!pelletArr[j].hasBeenCollected() && (p.getX()+i)/moveSpeed == pelletArr[j].getX()/moveSpeed && (p.getY()+p.getHeight())/moveSpeed == pelletArr[j].getY()/moveSpeed)
+                    for(int j = 0; j < pelletArr.length; ++j)
                     {
-                        pelletArr[j].collect();
-                        pelletImageViewArr[j].setVisible(false);
-                        return true;
+                        if(!pelletArr[j].hasBeenCollected() && (p.getX()+i)/moveSpeed == pelletArr[j].getX()/moveSpeed && (p.getY()+k)/moveSpeed == pelletArr[j].getY()/moveSpeed)
+                        {
+                            pelletArr[j].collect();
+                            pelletImageViewArr[j].setVisible(false);
+                            return true;
+                        }
                     }
                 }
             }
@@ -981,7 +984,7 @@ public class ItsCoronaTime extends Application {
         }
         else if(p.getDirection() == "LEFT")
         {
-            for(int i = 0; i <= p.getWidth(); i+=moveSpeed)
+            for(int i = 0; i <= p.getHeight(); i+=moveSpeed)
             {
                 for(int j = 0; j < pelletArr.length; ++j)
                 {
@@ -997,15 +1000,18 @@ public class ItsCoronaTime extends Application {
         }
         else if(p.getDirection() == "RIGHT")
         {
-            for(int i = 0; i <= p.getWidth(); i+=moveSpeed)
+            for(int i = 0; i <= p.getHeight(); i+=moveSpeed)
             {
-                for(int j = 0; j < pelletArr.length; ++j)
+                for(int k = 0; k <= p.getWidth(); k+=moveSpeed)
                 {
-                    if(!pelletArr[j].hasBeenCollected() && (p.getX()+p.getWidth())/moveSpeed == pelletArr[j].getX()/moveSpeed && (p.getY()+i)/moveSpeed == pelletArr[j].getY()/moveSpeed)
+                    for(int j = 0; j < pelletArr.length; ++j)
                     {
-                        pelletArr[j].collect();
-                        pelletImageViewArr[j].setVisible(false);
-                        return true;
+                        if(!pelletArr[j].hasBeenCollected() && (p.getX()+k)/moveSpeed == pelletArr[j].getX()/moveSpeed && (p.getY()+i)/moveSpeed == pelletArr[j].getY()/moveSpeed)
+                        {
+                            pelletArr[j].collect();
+                            pelletImageViewArr[j].setVisible(false);
+                            return true;
+                        }
                     }
                 }
             }
