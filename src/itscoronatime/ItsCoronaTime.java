@@ -1311,6 +1311,7 @@ public class ItsCoronaTime extends Application {
                                 gamePane.getChildren().removeAll(pelletImageViewArr[i]);
                             }
                             pane.getChildren().add(new ImageView(gameOverImage));
+                            mediaPlayer.stop();
                         }
                     }
 
