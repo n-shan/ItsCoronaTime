@@ -31,6 +31,8 @@ public class ItsCoronaTime extends Application {
     private ImageView pelletImageViewArr[] = new ImageView[212];
     private final double gameTickSpeed = 0.1;
 
+    private boolean hasPowerUp = false;
+
 
     //creates an array of booleans that will return if there is a wall at x,y space
     //size is determined by the total pixels of the arena dived by how many pixels person can move
@@ -1356,11 +1358,12 @@ public class ItsCoronaTime extends Application {
                     //check to see if perosn is collecting hazmatsuit
                     if(collectHazmat(person, hazmatSuit1, hazmatImageView1, hazmatSuit2, hazmatImageView2, hazmatSuit3, hazmatImageView3, hazmatSuit4, hazmatImageView4))
                     {
+                        hasPowerUp = true;
                         //implement hazmat powerup here
                     }
 
                     //checks to see if person gets infected by virus
-                    if(checkInfected(person, rona1, rona2, rona3, rona4))
+                    if(!hasPowerUp && checkInfected(person, rona1, rona2, rona3, rona4))
                     {
                         person.decLives();
                         displayLives.setText("Lives: " + person.getLives());
