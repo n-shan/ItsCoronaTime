@@ -1149,10 +1149,15 @@ public class ItsCoronaTime extends Application {
         scoreBoard.setFill(Color.WHITE);
         scoreBoard.setFont(Font.font(40));
 
+        //display lives
+        Text displayLives = new Text(5, 985, "Lives: " + Integer.toString(person.getLives()));
+        displayLives.setFill(Color.WHITE);
+        displayLives.setFont(Font.font(40));
+
 
         //add imageviews and scoreboard to pane
         gamePane.getChildren().addAll(hazmatImageView1, hazmatImageView2, hazmatImageView3, hazmatImageView4,
-                ronaImageView1, ronaImageView2, ronaImageView3, ronaImageView4, personImageView, scoreBoard);
+                ronaImageView1, ronaImageView2, ronaImageView3, ronaImageView4, personImageView, scoreBoard, displayLives);
 
         StackPane stackPane = new StackPane();
 
