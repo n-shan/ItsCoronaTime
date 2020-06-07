@@ -45,6 +45,7 @@ public class ItsCoronaTime extends Application {
     private Image startImage = new Image("image/StartScreen.png");
     private Image arenaImage = new Image("image/CoronaTimeArenaTemplate.jpeg");
     private Image gameOverImage = new Image("image/GameOverScreen.png");
+    private Image gameWonImage = new Image("image/GameWonScreen.png");
     private boolean startScreen = true;
 
 
@@ -1157,6 +1158,17 @@ public class ItsCoronaTime extends Application {
         return false;
     }
 
+
+    public boolean allToiletPaperCollected()
+    {
+        for(int i = 0; i < pelletArr.length; ++i)
+        {
+            if(!pelletArr[i].hasBeenCollected())
+                return false;
+        }
+        return true;
+    }
+
     @Override
     public void start(Stage primaryStage) throws Exception {
 
@@ -1168,11 +1180,14 @@ public class ItsCoronaTime extends Application {
 
         //play corona time music
         String musicFile = "its-corona-time-music.mp3";
+        String musicFile2 = "coronavirus-scream-audio.mp3";
 
         Media media = new Media(new File(musicFile).toURI().toString());
+        Media mediaGameOver = new Media((new File(musicFile2).toURI().toString()));
 
 
         MediaPlayer mediaPlayer = new MediaPlayer(media);
+        MediaPlayer mediaPlayerGameOver = new MediaPlayer(mediaGameOver);
 
         mediaPlayer.play();
 
@@ -1362,6 +1377,17 @@ public class ItsCoronaTime extends Application {
                         //implement hazmat powerup here
                     }
 
+                    //checks to see if all the toilet paper has been collected
+                    if(allToiletPaperCollected())
+                    {
+                        gamePane.getChildren().removeAll(hazmatImageView1, hazmatImageView2, hazmatImageView3, hazmatImageView4,
+                                ronaImageView1, ronaImageView2, ronaImageView3, ronaImageView4, personImageView, scoreBoard, displayLives);
+                        for(int i = 0; i < pelletImageViewArr.length; i++){
+                            gamePane.getChildren().removeAll(pelletImageViewArr[i]);
+                        }
+                        pane.getChildren().add(new ImageView(gameWonImage));
+                    }
+
                     //checks to see if person gets infected by virus
                     if(!hasPowerUp && checkInfected(person, rona1, rona2, rona3, rona4))
                     {
@@ -1395,6 +1421,9 @@ public class ItsCoronaTime extends Application {
 
                         //move person back to starting position
                         person.setLocation(210, 90);
+                        person.setDirection("");
+
+                        //if person is out of lives, display gameover screen
                         if(person.getLives() <= 0)
                         {
                             gamePane.getChildren().removeAll(hazmatImageView1, hazmatImageView2, hazmatImageView3, hazmatImageView4,
@@ -1404,6 +1433,7 @@ public class ItsCoronaTime extends Application {
                             }
                             pane.getChildren().add(new ImageView(gameOverImage));
                             mediaPlayer.stop();
+                            mediaPlayerGameOver.play();
                         }
                     }
 
