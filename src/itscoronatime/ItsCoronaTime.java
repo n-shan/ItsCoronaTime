@@ -1353,7 +1353,8 @@ public class ItsCoronaTime extends Application {
 
         Timeline musicTimeLine = new Timeline(new KeyFrame(Duration.seconds(60), new EventHandler<ActionEvent>() {
             public void handle(ActionEvent event) {
-                mediaPlayer.play();
+                if(!person.isDead())
+                    mediaPlayer.play();
             }
         }));
         musicTimeLine.setCycleCount(Timeline.INDEFINITE);
@@ -1434,6 +1435,7 @@ public class ItsCoronaTime extends Application {
                             pane.getChildren().add(new ImageView(gameOverImage));
                             mediaPlayer.stop();
                             mediaPlayerGameOver.play();
+                            person.setDead();
                         }
                     }
 
