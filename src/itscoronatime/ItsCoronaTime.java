@@ -3,6 +3,7 @@ package itscoronatime;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
@@ -47,6 +48,7 @@ public class ItsCoronaTime extends Application {
     private Image gameOverImage = new Image("image/GameOverScreen.png");
     private Image gameWonImage = new Image("image/GameWonScreen.png");
     private boolean startScreen = true;
+    private int[] hazsuitTimer = new int[]{0,1,2,3,4,5,6,7,8};
 
 
     //sets the walls for the arena
@@ -1182,7 +1184,7 @@ public class ItsCoronaTime extends Application {
         String musicFile = "its-corona-time-music.mp3";
         String musicFile2 = "coronavirus-scream-audio.mp3";
 
-        Media media = new Media(new File(musicFile).toURI().toString());
+       /* Media media = new Media(new File(musicFile).toURI().toString());
         Media mediaGameOver = new Media((new File(musicFile2).toURI().toString()));
 
 
@@ -1190,6 +1192,8 @@ public class ItsCoronaTime extends Application {
         MediaPlayer mediaPlayerGameOver = new MediaPlayer(mediaGameOver);
 
         mediaPlayer.play();
+
+        */
 
 
         //create pellet arrays to hold all toiletpaper (pellets)
@@ -1264,6 +1268,7 @@ public class ItsCoronaTime extends Application {
         HazmatSuit hazmatSuit2 = new HazmatSuit(930, 155);
         HazmatSuit hazmatSuit3 = new HazmatSuit(40, 690);
         HazmatSuit hazmatSuit4 = new HazmatSuit(930, 690);
+
         //create hazmatsuit images
         Image hazmatImage1 = new Image(hazmatSuit1.getImageName(), hazmatSuit1.getWidth(),
                 hazmatSuit1.getHeight(), false, false);
@@ -1273,11 +1278,13 @@ public class ItsCoronaTime extends Application {
                 hazmatSuit3.getHeight(), false, false);
         Image hazmatImage4 = new Image(hazmatSuit4.getImageName(), hazmatSuit4.getWidth(),
                 hazmatSuit4.getHeight(), false, false);
+
         //create hazmarsuit imageviews
         ImageView hazmatImageView1 = new ImageView(hazmatImage1);
         ImageView hazmatImageView2 = new ImageView(hazmatImage2);
         ImageView hazmatImageView3 = new ImageView(hazmatImage3);
         ImageView hazmatImageView4 = new ImageView(hazmatImage4);
+
         //set imageview locations
         hazmatImageView1.setX(hazmatSuit1.getX());
         hazmatImageView1.setY(hazmatSuit1.getY());
@@ -1290,6 +1297,19 @@ public class ItsCoronaTime extends Application {
 
         hazmatImageView4.setX(hazmatSuit4.getX());
         hazmatImageView4.setY(hazmatSuit4.getY());
+        HazmatSuit personPowerUp = new HazmatSuit();
+
+        //create a personhazmat imageview
+        Image personPowerUpImage = new Image(personPowerUp.getImageName(), person.getWidth(),
+                person.getHeight(),false,false);
+
+        ImageView personPowerUpImageView = new ImageView(personPowerUpImage);
+
+
+        personPowerUpImageView.setX(person.getX());
+        personPowerUpImageView.setY(person.getY());
+
+
 
 
         //create scoreboard
@@ -1302,10 +1322,17 @@ public class ItsCoronaTime extends Application {
         displayLives.setFill(Color.WHITE);
         displayLives.setFont(Font.font(40));
 
+        //display hazsuit powerup timer
+
+        Text hazsuitTimer = new Text(600,985,"              Collect Hazsuit!");
+        hazsuitTimer.setFill(Color.WHITE);
+        hazsuitTimer.setFont(Font.font(40));
+
 
         //add imageviews and scoreboard to pane
         gamePane.getChildren().addAll(hazmatImageView1, hazmatImageView2, hazmatImageView3, hazmatImageView4,
-                ronaImageView1, ronaImageView2, ronaImageView3, ronaImageView4, personImageView, scoreBoard, displayLives);
+                ronaImageView1, ronaImageView2, ronaImageView3, ronaImageView4, personImageView, scoreBoard, displayLives,
+                hazsuitTimer);
 
         StackPane stackPane = new StackPane();
 
@@ -1353,20 +1380,26 @@ public class ItsCoronaTime extends Application {
 
         Timeline musicTimeLine = new Timeline(new KeyFrame(Duration.seconds(60), new EventHandler<ActionEvent>() {
             public void handle(ActionEvent event) {
-                if(!person.isDead())
-                    mediaPlayer.play();
+                if(!person.isDead());
+                    //mediaPlayer.play();
             }
         }));
-        musicTimeLine.setCycleCount(Timeline.INDEFINITE);
-        musicTimeLine.play();
+
+        //musicTimeLine.setCycleCount(Timeline.INDEFINITE);
+        //musicTimeLine.play();
 
         new Thread(() -> {
             Timeline personTimeline = new Timeline(new KeyFrame(Duration.seconds(gameTickSpeed), new EventHandler<ActionEvent>() {
                 public void handle(ActionEvent event) {
                     //makes person move
+
                     moveEntity(person);
-                    personImageView.setX(person.getX());
-                    personImageView.setY(person.getY());
+
+                    if(!hasPowerUp) {
+                        personImageView.setX(person.getX());
+                        personImageView.setY(person.getY());
+                    }
+
 
                     //checks to see if person is collecting toilet paper
                     collectToiletPaper(person);
@@ -1376,6 +1409,13 @@ public class ItsCoronaTime extends Application {
                     {
                         hasPowerUp = true;
                         //implement hazmat powerup here
+                        gamePane.getChildren().add(personPowerUpImageView);
+                        gamePane.getChildren().remove(personImageView);
+                        int display = person.countDown();
+                        Platform.runLater(() -> hazsuitTimer.setText("ITS CORONA TIME : " + display));
+
+
+
                     }
 
                     //checks to see if all the toilet paper has been collected
@@ -1390,6 +1430,26 @@ public class ItsCoronaTime extends Application {
                     }
 
                     //checks to see if person gets infected by virus
+
+                    if(hasPowerUp){
+                        personPowerUpImageView.setX(person.getX());
+                        personPowerUpImageView.setY(person.getY());
+
+                        int display = person.countDown();
+                        Platform.runLater(() ->
+                                hazsuitTimer.setText("ITS CORONA TIME : " + display));
+
+                        if(display == 0){
+                            Platform.runLater(() -> hazsuitTimer.setText("              Collect Hazsuit!"));
+                            hasPowerUp = false;
+                            person.resetTimer();
+                            gamePane.getChildren().add(personImageView);
+                            gamePane.getChildren().remove(personPowerUpImageView);
+                        }
+
+
+                    }
+
                     if(!hasPowerUp && checkInfected(person, rona1, rona2, rona3, rona4))
                     {
                         person.decLives();
@@ -1433,8 +1493,8 @@ public class ItsCoronaTime extends Application {
                                 gamePane.getChildren().removeAll(pelletImageViewArr[i]);
                             }
                             pane.getChildren().add(new ImageView(gameOverImage));
-                            mediaPlayer.stop();
-                            mediaPlayerGameOver.play();
+                            //mediaPlayer.stop();
+                            //mediaPlayerGameOver.play();
                             person.setDead();
                         }
                     }

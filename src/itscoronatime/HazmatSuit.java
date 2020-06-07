@@ -13,6 +13,13 @@ public class HazmatSuit extends Entity {
         setVisibility(true);
         isCollected = false;
     }
+
+    HazmatSuit(){
+        setWidth(width);
+        setHeight(height);
+
+    }
+
     public void collect() {
         isCollected = true;
     }
