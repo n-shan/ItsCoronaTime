@@ -32,6 +32,8 @@ public class ItsCoronaTime extends Application {
     private final double gameTickSpeed = 0.1;
 
     private boolean hasPowerUp = false;
+    private int timer = 0;
+    private int timeCountUp = 0;
 
 
     //creates an array of booleans that will return if there is a wall at x,y space
@@ -1302,10 +1304,15 @@ public class ItsCoronaTime extends Application {
         displayLives.setFill(Color.WHITE);
         displayLives.setFont(Font.font(40));
 
+        //display Hazmat Timer
+        Text displayHazmatTimer = new Text(600, 985, "Time left for Hazmat: " + timer);
+        displayHazmatTimer.setFill(Color.WHITE);
+        displayHazmatTimer.setFont(Font.font(40));
 
-        //add imageviews and scoreboard to pane
+
+        //add imageviews and text to pane
         gamePane.getChildren().addAll(hazmatImageView1, hazmatImageView2, hazmatImageView3, hazmatImageView4,
-                ronaImageView1, ronaImageView2, ronaImageView3, ronaImageView4, personImageView, scoreBoard, displayLives);
+                ronaImageView1, ronaImageView2, ronaImageView3, ronaImageView4, personImageView, scoreBoard, displayLives, displayHazmatTimer);
 
         StackPane stackPane = new StackPane();
 
@@ -1375,14 +1382,33 @@ public class ItsCoronaTime extends Application {
                     if(collectHazmat(person, hazmatSuit1, hazmatImageView1, hazmatSuit2, hazmatImageView2, hazmatSuit3, hazmatImageView3, hazmatSuit4, hazmatImageView4))
                     {
                         hasPowerUp = true;
+                        timer = 15;
+                        displayHazmatTimer.setText("Time left for Hazmat: " + timer);
                         //implement hazmat powerup here
                     }
+
+                    if(hasPowerUp)
+                    {
+                        timeCountUp++;
+                        if(timeCountUp % (gameTickSpeed*100) == 0)
+                        {
+                            timer--;
+                            displayHazmatTimer.setText("Time left for Hazmat: " + timer);
+                        }
+                        if(timer <= 0)
+                        {
+                            hasPowerUp = false;
+                            timer = 0;
+                            timeCountUp = 0;
+                        }
+                    }
+
 
                     //checks to see if all the toilet paper has been collected
                     if(allToiletPaperCollected())
                     {
                         gamePane.getChildren().removeAll(hazmatImageView1, hazmatImageView2, hazmatImageView3, hazmatImageView4,
-                                ronaImageView1, ronaImageView2, ronaImageView3, ronaImageView4, personImageView, scoreBoard, displayLives);
+                                ronaImageView1, ronaImageView2, ronaImageView3, ronaImageView4, personImageView, scoreBoard, displayLives, displayHazmatTimer);
                         for(int i = 0; i < pelletImageViewArr.length; i++){
                             gamePane.getChildren().removeAll(pelletImageViewArr[i]);
                         }
@@ -1428,7 +1454,7 @@ public class ItsCoronaTime extends Application {
                         if(person.getLives() <= 0)
                         {
                             gamePane.getChildren().removeAll(hazmatImageView1, hazmatImageView2, hazmatImageView3, hazmatImageView4,
-                                    ronaImageView1, ronaImageView2, ronaImageView3, ronaImageView4, personImageView, scoreBoard, displayLives);
+                                    ronaImageView1, ronaImageView2, ronaImageView3, ronaImageView4, personImageView, scoreBoard, displayLives, displayHazmatTimer);
                             for(int i = 0; i < pelletImageViewArr.length; i++){
                                 gamePane.getChildren().removeAll(pelletImageViewArr[i]);
                             }
