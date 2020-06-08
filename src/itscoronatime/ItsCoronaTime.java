@@ -1268,6 +1268,13 @@ public class ItsCoronaTime extends Application {
         ImageView ronaImageView2 = new ImageView(ronaImage2);
         ImageView ronaImageView3 = new ImageView(ronaImage3);
         ImageView ronaImageView4 = new ImageView(ronaImage4);
+
+        ImageView ronaSadImageView1 = new ImageView(ronaSadImage1);
+        ImageView ronaSadImageView2 = new ImageView(ronaSadImage2);
+        ImageView ronaSadImageView3 = new ImageView(ronaSadImage3);
+        ImageView ronaSadImageView4 = new ImageView(ronaSadImage4);
+
+
         //set ImageView locations
         ronaImageView1.setX(rona1.getX());
         ronaImageView1.setY(rona1.getY());
@@ -1280,6 +1287,24 @@ public class ItsCoronaTime extends Application {
 
         ronaImageView4.setX(rona4.getX());
         ronaImageView4.setY(rona4.getY());
+
+        ronaSadImageView1.setX(0);
+        ronaSadImageView1.setY(0);
+
+        ronaSadImageView2.setX(0);
+        ronaSadImageView2.setY(0);
+
+        ronaSadImageView3.setX(0);
+        ronaSadImageView3.setY(0);
+
+        ronaSadImageView4.setX(0);
+        ronaSadImageView4.setY(0);
+
+        ronaSadImageView1.setVisible(false);
+        ronaSadImageView2.setVisible(false);
+        ronaSadImageView3.setVisible(false);
+        ronaSadImageView4.setVisible(false);
+
 
         //create hazmatsuits
         HazmatSuit hazmatSuit1 = new HazmatSuit(40, 155);
@@ -1332,7 +1357,7 @@ public class ItsCoronaTime extends Application {
 
         //add imageviews and text to pane
         gamePane.getChildren().addAll(hazmatImageView1, hazmatImageView2, hazmatImageView3, hazmatImageView4,
-                ronaImageView1, ronaImageView2, ronaImageView3, ronaImageView4, personImageView, scoreBoard, displayLives, displayHazmatTimer);
+                ronaImageView1, ronaImageView2, ronaImageView3, ronaImageView4, ronaSadImageView1, ronaSadImageView2, ronaSadImageView3, ronaSadImageView4, personImageView, scoreBoard, displayLives, displayHazmatTimer);
 
         StackPane stackPane = new StackPane();
 
@@ -1404,23 +1429,55 @@ public class ItsCoronaTime extends Application {
                         hasPowerUp = true;
                         timer = 15;
                         displayHazmatTimer.setText("Time left for Hazmat: " + timer);
-                        //implement hazmat powerup here
                     }
 
                     if(hasPowerUp)
                     {
                         timeCountUp++;
+                        ronaImageView1.setVisible(false);
+                        ronaImageView2.setVisible(false);
+                        ronaImageView3.setVisible(false);
+                        ronaImageView4.setVisible(false);
+
+                        ronaSadImageView1.setVisible(true);
+                        ronaSadImageView2.setVisible(true);
+                        ronaSadImageView3.setVisible(true);
+                        ronaSadImageView4.setVisible(true);
+
+                        ronaSadImageView1.setX(rona1.getX());
+                        ronaSadImageView1.setY(rona1.getY());
+
+                        ronaSadImageView2.setX(rona2.getX());
+                        ronaSadImageView2.setY(rona2.getY());
+
+                        ronaSadImageView3.setX(rona3.getX());
+                        ronaSadImageView3.setY(rona3.getY());
+
+                        ronaSadImageView4.setX(rona4.getX());
+                        ronaSadImageView4.setY(rona4.getY());
+
+
                         if(timeCountUp % (gameTickSpeed*100) == 0)
                         {
                             timer--;
                             displayHazmatTimer.setText("Time left for Hazmat: " + timer);
                         }
-                        if(timer <= 0)
+                        if(timer <= 0)  //powerup is over, return everything back to normal
                         {
                             hasPowerUp = false;
                             timer = 0;
                             timeCountUp = 0;
                             virusKills = 1;
+
+                            ronaSadImageView1.setVisible(false);
+                            ronaSadImageView2.setVisible(false);
+                            ronaSadImageView3.setVisible(false);
+                            ronaSadImageView4.setVisible(false);
+
+                            ronaImageView1.setVisible(true);
+                            ronaImageView2.setVisible(true);
+                            ronaImageView3.setVisible(true);
+                            ronaImageView4.setVisible(true);
                         }
                         switch(checkKillVirus(person, rona1, rona2, rona3, rona4))
                         {
@@ -1473,7 +1530,7 @@ public class ItsCoronaTime extends Application {
                     if(allToiletPaperCollected())
                     {
                         gamePane.getChildren().removeAll(hazmatImageView1, hazmatImageView2, hazmatImageView3, hazmatImageView4,
-                                ronaImageView1, ronaImageView2, ronaImageView3, ronaImageView4, personImageView, scoreBoard, displayLives, displayHazmatTimer);
+                                ronaImageView1, ronaImageView2, ronaImageView3, ronaImageView4, ronaSadImageView1, ronaSadImageView2, ronaSadImageView3, ronaSadImageView4, personImageView, scoreBoard, displayLives, displayHazmatTimer);
                         for(int i = 0; i < pelletImageViewArr.length; i++){
                             gamePane.getChildren().removeAll(pelletImageViewArr[i]);
                         }
@@ -1519,7 +1576,7 @@ public class ItsCoronaTime extends Application {
                         if(person.getLives() <= 0)
                         {
                             gamePane.getChildren().removeAll(hazmatImageView1, hazmatImageView2, hazmatImageView3, hazmatImageView4,
-                                    ronaImageView1, ronaImageView2, ronaImageView3, ronaImageView4, personImageView, scoreBoard, displayLives, displayHazmatTimer);
+                                    ronaImageView1, ronaImageView2, ronaImageView3, ronaImageView4, ronaSadImageView1, ronaSadImageView2, ronaSadImageView3, ronaSadImageView4, personImageView, scoreBoard, displayLives, displayHazmatTimer);
                             for(int i = 0; i < pelletImageViewArr.length; i++){
                                 gamePane.getChildren().removeAll(pelletImageViewArr[i]);
                             }
