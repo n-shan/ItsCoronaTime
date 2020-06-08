@@ -35,6 +35,7 @@ public class ItsCoronaTime extends Application {
     private int timer = 0;
     private int timeCountUp = 0;
     private int virusKills = 1;
+    private int lifeIncreaseValue = 10000;
 
 
     //creates an array of booleans that will return if there is a wall at x,y space
@@ -1399,7 +1400,6 @@ public class ItsCoronaTime extends Application {
                 {
                     person.setDirection("RIGHT");
                 }
-                System.out.println("X: " + person.getX() + " Y: " + person.getY());
             }
         });
 
@@ -1427,7 +1427,8 @@ public class ItsCoronaTime extends Application {
                     if(collectHazmat(person, hazmatSuit1, hazmatImageView1, hazmatSuit2, hazmatImageView2, hazmatSuit3, hazmatImageView3, hazmatSuit4, hazmatImageView4))
                     {
                         hasPowerUp = true;
-                        timer = 15; //sets the length of timer
+                        person.incScore(50);
+                        timer = 1000; //sets the length of timer
                         displayHazmatTimer.setText("Time left for Hazmat: " + timer);
                     }
 
@@ -1587,9 +1588,11 @@ public class ItsCoronaTime extends Application {
                         }
                     }
 
-                    if(person.getScore() % 10000 == 0)
+                    if(person.getScore() >= lifeIncreaseValue)
                     {
+                        lifeIncreaseValue *= 2;
                         person.incLives();
+                        displayLives.setText("Lives: " + person.getLives());
                     }
 
                     //updates the scoreboard
