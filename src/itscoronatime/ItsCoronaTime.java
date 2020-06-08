@@ -1428,7 +1428,7 @@ public class ItsCoronaTime extends Application {
                     {
                         hasPowerUp = true;
                         person.incScore(50);
-                        timer = 1000; //sets the length of timer
+                        timer = 15; //sets the length of timer
                         displayHazmatTimer.setText("Time left for Hazmat: " + timer);
                     }
 
