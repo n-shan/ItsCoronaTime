@@ -1618,6 +1618,13 @@ public class ItsCoronaTime extends Application {
                                 Random rand = new Random();
                                 int randNum;
                                 randNum = rand.nextInt(4);
+
+                                String oldDir = rona2.getDirection();
+                                while((directions[randNum] == "RIGHT" && oldDir == "LEFT") || (directions[randNum] == "LEFT" && oldDir == "RIGHT")
+                                        || (directions[randNum] == "UP" && oldDir == "DOWN") || (directions[randNum] == "DOWN" && oldDir == "UP")) {
+                                    randNum  = rand.nextInt(4);
+                                }
+
                                 rona2.setDirection(directions[randNum]);
                             }
                         }
@@ -1656,6 +1663,13 @@ public class ItsCoronaTime extends Application {
                                     Random rand = new Random();
                                     int randNum;
                                     randNum = rand.nextInt(4);
+
+                                    String oldDir = rona3.getDirection();
+                                    while((directions[randNum] == "RIGHT" && oldDir == "LEFT") || (directions[randNum] == "LEFT" && oldDir == "RIGHT")
+                                            || (directions[randNum] == "UP" && oldDir == "DOWN") || (directions[randNum] == "DOWN" && oldDir == "UP")) {
+                                        randNum  = rand.nextInt(4);
+                                    }
+
                                     rona3.setDirection(directions[randNum]);
                                 }
                             }
@@ -1700,6 +1714,13 @@ public class ItsCoronaTime extends Application {
                                     Random rand = new Random();
                                     int randNum;
                                     randNum = rand.nextInt(4);
+
+                                    String oldDir = rona1.getDirection();
+                                    while((directions[randNum] == "RIGHT" && oldDir == "LEFT") || (directions[randNum] == "LEFT" && oldDir == "RIGHT")
+                                            || (directions[randNum] == "UP" && oldDir == "DOWN") || (directions[randNum] == "DOWN" && oldDir == "UP")) {
+                                        randNum  = rand.nextInt(4);
+                                    }
+
                                     rona1.setDirection(directions[randNum]);
                                 }
                             }
@@ -1744,6 +1765,14 @@ public class ItsCoronaTime extends Application {
                                     Random rand = new Random();
                                     int randNum;
                                     randNum = rand.nextInt(4);
+
+                                    String oldDir = rona4.getDirection();
+                                    while((directions[randNum] == "RIGHT" && oldDir == "LEFT") || (directions[randNum] == "LEFT" && oldDir == "RIGHT")
+                                            || (directions[randNum] == "UP" && oldDir == "DOWN") || (directions[randNum] == "DOWN" && oldDir == "UP")) {
+                                        randNum  = rand.nextInt(4);
+                                    }
+
+
                                     rona4.setDirection(directions[randNum]);
                                 }
                             }
