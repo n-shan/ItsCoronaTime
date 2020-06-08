@@ -3,6 +3,7 @@ package itscoronatime;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
@@ -32,10 +33,6 @@ public class ItsCoronaTime extends Application {
     private final double gameTickSpeed = 0.1;
 
     private boolean hasPowerUp = false;
-    private int timer = 0;
-    private int timeCountUp = 0;
-    private int virusKills = 1;
-    private int lifeIncreaseValue = 10000;
 
 
     //creates an array of booleans that will return if there is a wall at x,y space
@@ -51,6 +48,7 @@ public class ItsCoronaTime extends Application {
     private Image gameOverImage = new Image("image/GameOverScreen.png");
     private Image gameWonImage = new Image("image/GameWonScreen.png");
     private boolean startScreen = true;
+    private int[] hazsuitTimer = new int[]{0,1,2,3,4,5,6,7,8};
 
 
     //sets the walls for the arena
@@ -1056,6 +1054,111 @@ public class ItsCoronaTime extends Application {
 //        moveEntity(virus);
 //    }
     
+    //attempt at virus AI, might work on later
+//    public void moveVirus(Coronavirus virus, Person person) {
+//        //calculate x and y distance to player
+//        int xDistToPLayer = person.getX() - virus.getX();
+//        int yDistToPlayer = person.getY() - virus.getY();
+//        String oldDir = virus.getDirection();
+//        boolean goodDir = true;
+//
+//        //check if further in x or y direction, and move accordingly
+//        while(goodDir) {
+//            if (xDistToPLayer >= yDistToPlayer) {
+//                if (xDistToPLayer >= 0) {
+//                    if (canMove(virus, "RIGHT")) {
+//                        virus.setDirection("RIGHT");
+//                    } else if (yDistToPlayer >= 0) {
+//                        if (canMove(virus, "DOWN")) {
+//                            virus.setDirection("DOWN");
+//                        } else if (canMove(virus, "UP")) {
+//                            virus.setDirection("UP");
+//                        } else {
+//                            virus.setDirection("LEFT");
+//                        }
+//                    } else {
+//                        if (canMove(virus, "UP")) {
+//                            virus.setDirection("UP");
+//                        } else if (canMove(virus, "DOWN")) {
+//                            virus.setDirection("DOWN");
+//                        } else {
+//                            virus.setDirection("LEFT");
+//                        }
+//                    }
+//                } else {
+//                    if (canMove(virus, "LEFT")) {
+//                        virus.setDirection("LEFT");
+//                    } else if (yDistToPlayer >= 0) {
+//                        if (canMove(virus, "DOWN")) {
+//                            virus.setDirection("DOWN");
+//                        } else if (canMove(virus, "UP")) {
+//                            virus.setDirection("UP");
+//                        } else {
+//                            virus.setDirection("RIGHT");
+//                        }
+//                    } else {
+//                        if (canMove(virus, "UP")) {
+//                            virus.setDirection("UP");
+//                        } else if (canMove(virus, "DOWN")) {
+//                            virus.setDirection("DOWN");
+//                        } else {
+//                            virus.setDirection("RIGHT");
+//                        }
+//                    }
+//                }
+//            }
+//            //y dist is greater
+//            else {
+//                if (yDistToPlayer >= 0) {
+//                    if (canMove(virus, "DOWN")) {
+//                        virus.setDirection("DOWN");
+//                    } else if (xDistToPLayer >= 0) {
+//                        if (canMove(virus, "RIGHT")) {
+//                            virus.setDirection("RIGHT");
+//                        } else if (canMove(virus, "LEFT")) {
+//                            virus.setDirection("LEFT");
+//                        } else {
+//                            virus.setDirection("UP");
+//                        }
+//                    } else {
+//                        if (canMove(virus, "LEFT")) {
+//                            virus.setDirection("LEFT");
+//                        } else if (canMove(virus, "RIGHT")) {
+//                            virus.setDirection("RIGHT");
+//                        } else {
+//                            virus.setDirection("UP");
+//                        }
+//                    }
+//                } else {
+//                    if (canMove(virus, "UP")) {
+//                        virus.setDirection("UP");
+//                    } else if (xDistToPLayer >= 0) {
+//                        if (canMove(virus, "RIGHT")) {
+//                            virus.setDirection("RIGHT");
+//                        } else if (canMove(virus, "LEFT")) {
+//                            virus.setDirection("LEFT");
+//                        } else {
+//                            virus.setDirection("DOWN");
+//                        }
+//                    } else {
+//                        if (canMove(virus, "LEFT")) {
+//                            virus.setDirection("LEFT");
+//                        } else if (canMove(virus, "RIGHT")) {
+//                            virus.setDirection("RIGHT");
+//                        } else {
+//                            virus.setDirection("DOWN");
+//                        }
+//                    }
+//                }
+//            }
+////            if(virus.getDirection() == "RIGHT" && oldDir == "LEFT" || virus.getDirection() == "LEFT" && oldDir == "RIGHT"
+////               || virus.getDirection() == "UP" && oldDir == "DOWN" || virus.getDirection() == "DOWN" && oldDir == "UP") {
+////                goodDir = false;
+////            }
+//        }
+//        moveEntity(virus);
+//    }
+
     public boolean canCollectToiletPaper(Person p)
     {
         if(p.getDirection() == "DOWN")
@@ -1267,19 +1370,6 @@ public class ItsCoronaTime extends Application {
         return false;
     }
 
-    public int checkKillVirus(Person p, Coronavirus c1, Coronavirus c2, Coronavirus c3, Coronavirus c4)
-    {
-        if(isInfected(p, c1))
-            return 1;
-        if(isInfected(p, c2))
-            return 2;
-        if(isInfected(p, c3))
-            return 3;
-        if(isInfected(p, c4))
-            return 4;
-        return 0;
-    }
-
 
     public boolean allToiletPaperCollected()
     {
@@ -1304,7 +1394,7 @@ public class ItsCoronaTime extends Application {
         String musicFile = "its-corona-time-music.mp3";
         String musicFile2 = "coronavirus-scream-audio.mp3";
 
-        Media media = new Media(new File(musicFile).toURI().toString());
+       /* Media media = new Media(new File(musicFile).toURI().toString());
         Media mediaGameOver = new Media((new File(musicFile2).toURI().toString()));
 
 
@@ -1312,6 +1402,8 @@ public class ItsCoronaTime extends Application {
         MediaPlayer mediaPlayerGameOver = new MediaPlayer(mediaGameOver);
 
         mediaPlayer.play();
+
+        */
 
 
         //create pellet arrays to hold all toiletpaper (pellets)
@@ -1331,15 +1423,11 @@ public class ItsCoronaTime extends Application {
             pelletImageViewArr[i].setY(pelletArr[i].getY());
         }
 
-
         setpellets(pelletImageViewArr);
-
 
         for(int i = 0; i < pelletImageViewArr.length; i++){
             gamePane.getChildren().addAll(pelletImageViewArr[i]);
         }
-
-
 
         //create person
         Person person = new Person(210, 90, 50, 50);
@@ -1363,24 +1451,11 @@ public class ItsCoronaTime extends Application {
         Image ronaImage2 = new Image(rona2.getImageName(), rona2.getWidth(), rona2.getHeight(), false, false);
         Image ronaImage3 = new Image(rona3.getImageName(), rona3.getWidth(), rona3.getHeight(), false, false);
         Image ronaImage4 = new Image(rona4.getImageName(), rona4.getWidth(), rona4.getHeight(), false, false);
-
-        Image ronaSadImage1 = new Image("image/GhostSad.png", rona1.getWidth(), rona1.getHeight(), false, false);
-        Image ronaSadImage2 = new Image("image/GhostSad.png", rona2.getWidth(), rona2.getHeight(), false, false);
-        Image ronaSadImage3 = new Image("image/GhostSad.png", rona3.getWidth(), rona3.getHeight(), false, false);
-        Image ronaSadImage4 = new Image("image/GhostSad.png", rona4.getWidth(), rona4.getHeight(), false, false);
-
         //create coronaVirus imageViewers
         ImageView ronaImageView1 = new ImageView(ronaImage1);
         ImageView ronaImageView2 = new ImageView(ronaImage2);
         ImageView ronaImageView3 = new ImageView(ronaImage3);
         ImageView ronaImageView4 = new ImageView(ronaImage4);
-
-        ImageView ronaSadImageView1 = new ImageView(ronaSadImage1);
-        ImageView ronaSadImageView2 = new ImageView(ronaSadImage2);
-        ImageView ronaSadImageView3 = new ImageView(ronaSadImage3);
-        ImageView ronaSadImageView4 = new ImageView(ronaSadImage4);
-
-
         //set ImageView locations
         ronaImageView1.setX(rona1.getX());
         ronaImageView1.setY(rona1.getY());
@@ -1394,29 +1469,12 @@ public class ItsCoronaTime extends Application {
         ronaImageView4.setX(rona4.getX());
         ronaImageView4.setY(rona4.getY());
 
-        ronaSadImageView1.setX(0);
-        ronaSadImageView1.setY(0);
-
-        ronaSadImageView2.setX(0);
-        ronaSadImageView2.setY(0);
-
-        ronaSadImageView3.setX(0);
-        ronaSadImageView3.setY(0);
-
-        ronaSadImageView4.setX(0);
-        ronaSadImageView4.setY(0);
-
-        ronaSadImageView1.setVisible(false);
-        ronaSadImageView2.setVisible(false);
-        ronaSadImageView3.setVisible(false);
-        ronaSadImageView4.setVisible(false);
-
-
         //create hazmatsuits
         HazmatSuit hazmatSuit1 = new HazmatSuit(40, 155);
         HazmatSuit hazmatSuit2 = new HazmatSuit(930, 155);
         HazmatSuit hazmatSuit3 = new HazmatSuit(40, 690);
         HazmatSuit hazmatSuit4 = new HazmatSuit(930, 690);
+
         //create hazmatsuit images
         Image hazmatImage1 = new Image(hazmatSuit1.getImageName(), hazmatSuit1.getWidth(),
                 hazmatSuit1.getHeight(), false, false);
@@ -1426,11 +1484,13 @@ public class ItsCoronaTime extends Application {
                 hazmatSuit3.getHeight(), false, false);
         Image hazmatImage4 = new Image(hazmatSuit4.getImageName(), hazmatSuit4.getWidth(),
                 hazmatSuit4.getHeight(), false, false);
+
         //create hazmarsuit imageviews
         ImageView hazmatImageView1 = new ImageView(hazmatImage1);
         ImageView hazmatImageView2 = new ImageView(hazmatImage2);
         ImageView hazmatImageView3 = new ImageView(hazmatImage3);
         ImageView hazmatImageView4 = new ImageView(hazmatImage4);
+
         //set imageview locations
         hazmatImageView1.setX(hazmatSuit1.getX());
         hazmatImageView1.setY(hazmatSuit1.getY());
@@ -1443,6 +1503,19 @@ public class ItsCoronaTime extends Application {
 
         hazmatImageView4.setX(hazmatSuit4.getX());
         hazmatImageView4.setY(hazmatSuit4.getY());
+        HazmatSuit personPowerUp = new HazmatSuit();
+
+        //create a personhazmat imageview
+        Image personPowerUpImage = new Image(personPowerUp.getImageName(), person.getWidth(),
+                person.getHeight(),false,false);
+
+        ImageView personPowerUpImageView = new ImageView(personPowerUpImage);
+
+
+        personPowerUpImageView.setX(person.getX());
+        personPowerUpImageView.setY(person.getY());
+
+
 
 
         //create scoreboard
@@ -1455,15 +1528,17 @@ public class ItsCoronaTime extends Application {
         displayLives.setFill(Color.WHITE);
         displayLives.setFont(Font.font(40));
 
-        //display Hazmat Timer
-        Text displayHazmatTimer = new Text(600, 985, "Time left for Hazmat: " + timer);
-        displayHazmatTimer.setFill(Color.WHITE);
-        displayHazmatTimer.setFont(Font.font(40));
+        //display hazsuit powerup timer
+
+        Text hazsuitTimer = new Text(600,985,"              Collect Hazsuit!");
+        hazsuitTimer.setFill(Color.WHITE);
+        hazsuitTimer.setFont(Font.font(40));
 
 
-        //add imageviews and text to pane
+        //add imageviews and scoreboard to pane
         gamePane.getChildren().addAll(hazmatImageView1, hazmatImageView2, hazmatImageView3, hazmatImageView4,
-                ronaImageView1, ronaImageView2, ronaImageView3, ronaImageView4, ronaSadImageView1, ronaSadImageView2, ronaSadImageView3, ronaSadImageView4, personImageView, scoreBoard, displayLives, displayHazmatTimer);
+                ronaImageView1, ronaImageView2, ronaImageView3, ronaImageView4, personImageView, scoreBoard, displayLives,
+                hazsuitTimer);
 
         StackPane stackPane = new StackPane();
 
@@ -1505,138 +1580,55 @@ public class ItsCoronaTime extends Application {
                 {
                     person.setDirection("RIGHT");
                 }
+                System.out.println("X: " + person.getX() + " Y: " + person.getY());
             }
         });
 
         Timeline musicTimeLine = new Timeline(new KeyFrame(Duration.seconds(60), new EventHandler<ActionEvent>() {
             public void handle(ActionEvent event) {
-                if(!person.isDead())
-                    mediaPlayer.play();
+                if(!person.isDead());
+                    //mediaPlayer.play();
             }
         }));
-        musicTimeLine.setCycleCount(Timeline.INDEFINITE);
-        musicTimeLine.play();
+
+        //musicTimeLine.setCycleCount(Timeline.INDEFINITE);
+        //musicTimeLine.play();
 
         new Thread(() -> {
             Timeline personTimeline = new Timeline(new KeyFrame(Duration.seconds(gameTickSpeed), new EventHandler<ActionEvent>() {
                 public void handle(ActionEvent event) {
                     //makes person move
+
                     moveEntity(person);
-                    personImageView.setX(person.getX());
-                    personImageView.setY(person.getY());
+
+                    if(!hasPowerUp) {
+                        personImageView.setX(person.getX());
+                        personImageView.setY(person.getY());
+                    }
+
 
                     //checks to see if person is collecting toilet paper
                     collectToiletPaper(person);
 
-                    //check to see if person is collecting hazmatsuit
+                    //check to see if perosn is collecting hazmatsuit
                     if(collectHazmat(person, hazmatSuit1, hazmatImageView1, hazmatSuit2, hazmatImageView2, hazmatSuit3, hazmatImageView3, hazmatSuit4, hazmatImageView4))
                     {
                         hasPowerUp = true;
-                        person.incScore(50);
-                        timer = 15; //sets the length of timer
-                        displayHazmatTimer.setText("Time left for Hazmat: " + timer);
-                    }
+                        //implement hazmat powerup here
+                        gamePane.getChildren().add(personPowerUpImageView);
+                        gamePane.getChildren().remove(personImageView);
+                        int display = person.countDown();
+                        Platform.runLater(() -> hazsuitTimer.setText("ITS CORONA TIME : " + display));
 
-                    if(hasPowerUp)
-                    {
-                        timeCountUp++;
-                        ronaImageView1.setVisible(false);
-                        ronaImageView2.setVisible(false);
-                        ronaImageView3.setVisible(false);
-                        ronaImageView4.setVisible(false);
-
-                        ronaSadImageView1.setVisible(true);
-                        ronaSadImageView2.setVisible(true);
-                        ronaSadImageView3.setVisible(true);
-                        ronaSadImageView4.setVisible(true);
-
-                        ronaSadImageView1.setX(rona1.getX());
-                        ronaSadImageView1.setY(rona1.getY());
-
-                        ronaSadImageView2.setX(rona2.getX());
-                        ronaSadImageView2.setY(rona2.getY());
-
-                        ronaSadImageView3.setX(rona3.getX());
-                        ronaSadImageView3.setY(rona3.getY());
-
-                        ronaSadImageView4.setX(rona4.getX());
-                        ronaSadImageView4.setY(rona4.getY());
-
-
-                        if(timeCountUp % (gameTickSpeed*100) == 0)
-                        {
-                            timer--;
-                            displayHazmatTimer.setText("Time left for Hazmat: " + timer);
-                        }
-                        if(timer <= 0)  //powerup is over, return everything back to normal
-                        {
-                            hasPowerUp = false;
-                            timer = 0;
-                            timeCountUp = 0;
-                            virusKills = 1;
-
-                            ronaSadImageView1.setVisible(false);
-                            ronaSadImageView2.setVisible(false);
-                            ronaSadImageView3.setVisible(false);
-                            ronaSadImageView4.setVisible(false);
-
-                            ronaImageView1.setVisible(true);
-                            ronaImageView2.setVisible(true);
-                            ronaImageView3.setVisible(true);
-                            ronaImageView4.setVisible(true);
-                        }
-                        switch(checkKillVirus(person, rona1, rona2, rona3, rona4))
-                        {
-                            case 1:
-                                //move coronaVirus1 back to cage
-                                rona1.setLocation(400, 460);
-                                rona1.setDirection("RIGHT");
-                                rona1.setIsInCage(true);
-                                ronaImageView1.setX(rona1.getX());
-                                ronaImageView1.setY(rona1.getY());
-                                person.incScore(virusKills*100);
-                                virusKills *= 2;
-                                break;
-                            case 2:
-                                rona2.setLocation(475, 375);
-                                rona2.setDirection("LEFT");
-                                rona2.setIsInCage(true);
-                                ronaImageView2.setX(rona2.getX());
-                                ronaImageView2.setY(rona2.getY());
-                                person.incScore(virusKills*100);
-                                virusKills *= 2;
-                                break;
-                            case 3:
-                                rona3.setLocation(475, 375);
-                                rona3.setDirection("UP");
-                                rona3.setIsInCage(true);
-                                ronaImageView3.setX(rona3.getX());
-                                ronaImageView3.setY(rona3.getY());
-                                person.incScore(virusKills*100);
-                                virusKills *= 2;
-                                break;
-                            case 4:
-                                rona4.setLocation(550, 460);
-                                rona4.setDirection("LEFT");
-                                rona4.setIsInCage(true);
-                                ronaImageView4.setX(rona4.getX());
-                                ronaImageView4.setY(rona4.getY());
-                                person.incScore(virusKills*100);
-                                virusKills *= 2;
-                                break;
-                            default:    //do nothing
-                                break;
-                        }
 
 
                     }
-
 
                     //checks to see if all the toilet paper has been collected
                     if(allToiletPaperCollected())
                     {
                         gamePane.getChildren().removeAll(hazmatImageView1, hazmatImageView2, hazmatImageView3, hazmatImageView4,
-                                ronaImageView1, ronaImageView2, ronaImageView3, ronaImageView4, ronaSadImageView1, ronaSadImageView2, ronaSadImageView3, ronaSadImageView4, personImageView, scoreBoard, displayLives, displayHazmatTimer);
+                                ronaImageView1, ronaImageView2, ronaImageView3, ronaImageView4, personImageView, scoreBoard, displayLives);
                         for(int i = 0; i < pelletImageViewArr.length; i++){
                             gamePane.getChildren().removeAll(pelletImageViewArr[i]);
                         }
@@ -1644,6 +1636,26 @@ public class ItsCoronaTime extends Application {
                     }
 
                     //checks to see if person gets infected by virus
+
+                    if(hasPowerUp){
+                        personPowerUpImageView.setX(person.getX());
+                        personPowerUpImageView.setY(person.getY());
+
+                        int display = person.countDown();
+                        Platform.runLater(() ->
+                                hazsuitTimer.setText("ITS CORONA TIME : " + display));
+
+                        if(display == 0){
+                            Platform.runLater(() -> hazsuitTimer.setText("              Collect Hazsuit!"));
+                            hasPowerUp = false;
+                            person.resetTimer();
+                            gamePane.getChildren().add(personImageView);
+                            gamePane.getChildren().remove(personPowerUpImageView);
+                        }
+
+
+                    }
+
                     if(!hasPowerUp && checkInfected(person, rona1, rona2, rona3, rona4))
                     {
                         person.decLives();
@@ -1682,22 +1694,15 @@ public class ItsCoronaTime extends Application {
                         if(person.getLives() <= 0)
                         {
                             gamePane.getChildren().removeAll(hazmatImageView1, hazmatImageView2, hazmatImageView3, hazmatImageView4,
-                                    ronaImageView1, ronaImageView2, ronaImageView3, ronaImageView4, ronaSadImageView1, ronaSadImageView2, ronaSadImageView3, ronaSadImageView4, personImageView, scoreBoard, displayLives, displayHazmatTimer);
+                                    ronaImageView1, ronaImageView2, ronaImageView3, ronaImageView4, personImageView, scoreBoard, displayLives);
                             for(int i = 0; i < pelletImageViewArr.length; i++){
                                 gamePane.getChildren().removeAll(pelletImageViewArr[i]);
                             }
                             pane.getChildren().add(new ImageView(gameOverImage));
-                            mediaPlayer.stop();
-                            mediaPlayerGameOver.play();
+                            //mediaPlayer.stop();
+                            //mediaPlayerGameOver.play();
                             person.setDead();
                         }
-                    }
-
-                    if(person.getScore() >= lifeIncreaseValue)
-                    {
-                        lifeIncreaseValue *= 2;
-                        person.incLives();
-                        displayLives.setText("Lives: " + person.getLives());
                     }
 
                     //updates the scoreboard
@@ -1729,7 +1734,7 @@ public class ItsCoronaTime extends Application {
 
                                 String oldDir = rona2.getDirection();
                                 while((directions[randNum] == "RIGHT" && oldDir == "LEFT") || (directions[randNum] == "LEFT" && oldDir == "RIGHT")
-                                        || (directions[randNum] == "UP" && oldDir == "DOWN") || (directions[randNum] == "DOWN" && oldDir == "UP")) {
+                                    || (directions[randNum] == "UP" && oldDir == "DOWN") || (directions[randNum] == "DOWN" && oldDir == "UP")) {
                                     randNum  = rand.nextInt(4);
                                 }
 
