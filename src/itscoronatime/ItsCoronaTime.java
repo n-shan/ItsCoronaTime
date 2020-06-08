@@ -34,6 +34,7 @@ public class ItsCoronaTime extends Application {
     private boolean hasPowerUp = false;
     private int timer = 0;
     private int timeCountUp = 0;
+    private int virusKills = 1;
 
 
     //creates an array of booleans that will return if there is a wall at x,y space
@@ -1160,6 +1161,19 @@ public class ItsCoronaTime extends Application {
         return false;
     }
 
+    public int checkKillVirus(Person p, Coronavirus c1, Coronavirus c2, Coronavirus c3, Coronavirus c4)
+    {
+        if(isInfected(p, c1))
+            return 1;
+        if(isInfected(p, c2))
+            return 2;
+        if(isInfected(p, c3))
+            return 3;
+        if(isInfected(p, c4))
+            return 4;
+        return 0;
+    }
+
 
     public boolean allToiletPaperCollected()
     {
@@ -1243,6 +1257,12 @@ public class ItsCoronaTime extends Application {
         Image ronaImage2 = new Image(rona2.getImageName(), rona2.getWidth(), rona2.getHeight(), false, false);
         Image ronaImage3 = new Image(rona3.getImageName(), rona3.getWidth(), rona3.getHeight(), false, false);
         Image ronaImage4 = new Image(rona4.getImageName(), rona4.getWidth(), rona4.getHeight(), false, false);
+
+        Image ronaSadImage1 = new Image("image/GhostSad.png", rona1.getWidth(), rona1.getHeight(), false, false);
+        Image ronaSadImage2 = new Image("image/GhostSad.png", rona2.getWidth(), rona2.getHeight(), false, false);
+        Image ronaSadImage3 = new Image("image/GhostSad.png", rona3.getWidth(), rona3.getHeight(), false, false);
+        Image ronaSadImage4 = new Image("image/GhostSad.png", rona4.getWidth(), rona4.getHeight(), false, false);
+
         //create coronaVirus imageViewers
         ImageView ronaImageView1 = new ImageView(ronaImage1);
         ImageView ronaImageView2 = new ImageView(ronaImage2);
@@ -1400,7 +1420,52 @@ public class ItsCoronaTime extends Application {
                             hasPowerUp = false;
                             timer = 0;
                             timeCountUp = 0;
+                            virusKills = 1;
                         }
+                        switch(checkKillVirus(person, rona1, rona2, rona3, rona4))
+                        {
+                            case 1:
+                                //move coronaVirus1 back to cage
+                                rona1.setLocation(400, 460);
+                                rona1.setDirection("RIGHT");
+                                rona1.setIsInCage(true);
+                                ronaImageView1.setX(rona1.getX());
+                                ronaImageView1.setY(rona1.getY());
+                                person.incScore(virusKills*100);
+                                virusKills *= 2;
+                                break;
+                            case 2:
+                                rona2.setLocation(475, 375);
+                                rona2.setDirection("LEFT");
+                                rona2.setIsInCage(true);
+                                ronaImageView2.setX(rona2.getX());
+                                ronaImageView2.setY(rona2.getY());
+                                person.incScore(virusKills*100);
+                                virusKills *= 2;
+                                break;
+                            case 3:
+                                rona3.setLocation(475, 375);
+                                rona3.setDirection("UP");
+                                rona3.setIsInCage(true);
+                                ronaImageView3.setX(rona3.getX());
+                                ronaImageView3.setY(rona3.getY());
+                                person.incScore(virusKills*100);
+                                virusKills *= 2;
+                                break;
+                            case 4:
+                                rona4.setLocation(550, 460);
+                                rona4.setDirection("LEFT");
+                                rona4.setIsInCage(true);
+                                ronaImageView4.setX(rona4.getX());
+                                ronaImageView4.setY(rona4.getY());
+                                person.incScore(virusKills*100);
+                                virusKills *= 2;
+                                break;
+                            default:    //do nothing
+                                break;
+                        }
+
+
                     }
 
 
