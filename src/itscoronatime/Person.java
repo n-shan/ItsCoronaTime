@@ -29,4 +29,6 @@ public class Person extends Entity {
 
     public void setDead() { m_isdead = true; }
 
+    public void incLives() { m_lives++; }
+
 }

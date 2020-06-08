@@ -1423,11 +1423,11 @@ public class ItsCoronaTime extends Application {
                     //checks to see if person is collecting toilet paper
                     collectToiletPaper(person);
 
-                    //check to see if perosn is collecting hazmatsuit
+                    //check to see if person is collecting hazmatsuit
                     if(collectHazmat(person, hazmatSuit1, hazmatImageView1, hazmatSuit2, hazmatImageView2, hazmatSuit3, hazmatImageView3, hazmatSuit4, hazmatImageView4))
                     {
                         hasPowerUp = true;
-                        timer = 15;
+                        timer = 15; //sets the length of timer
                         displayHazmatTimer.setText("Time left for Hazmat: " + timer);
                     }
 
@@ -1585,6 +1585,11 @@ public class ItsCoronaTime extends Application {
                             mediaPlayerGameOver.play();
                             person.setDead();
                         }
+                    }
+
+                    if(person.getScore() % 10000 == 0)
+                    {
+                        person.incLives();
                     }
 
                     //updates the scoreboard
