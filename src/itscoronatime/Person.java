@@ -48,6 +48,8 @@ public class Person extends Entity {
 
     public void decLives() { m_lives--; }
 
+    public void incLives() { m_lives++; }
+
     public boolean isDead() { return m_isdead; }
 
     public void setDead() { m_isdead = true; }
