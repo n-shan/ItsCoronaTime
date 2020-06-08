@@ -946,85 +946,111 @@ public class ItsCoronaTime extends Application {
             }
         }
     }
-
-    public void moveVirus(Coronavirus virus, Person person) {
-        //calculate x and y distance to player
-        int xDistToPLayer = person.getX() - virus.getX();
-        int yDistToPlayer = person.getY() - virus.getY();
-
-        //check if further in x or y direction, and move accordingly
-        if(xDistToPLayer >= yDistToPlayer) {
-            if(xDistToPLayer >= 0) {
-                if(canMove(virus,"RIGHT")) {
-                    virus.setDirection("RIGHT");
-                }
-                else if (yDistToPlayer >= 0) {
-                    if(canMove(virus, "DOWN")) {
-                        virus.setDirection("DOWN");
-                    }
-                    else if (canMove(virus, "UP")) {
-                        virus.setDirection("UP");
-                    }
-                    else {
-                        virus.setDirection("LEFT");
-                    }
-                }
-                else {
-                    if(canMove(virus, "UP")) {
-                        virus.setDirection("UP");
-                    }
-                    else if(canMove(virus, "DOWN")) {
-                        virus.setDirection("DOWN");
-                    }
-                    else {
-                        virus.setDirection("LEFT");
-                    }
-                }
-            }
-            else {
-                if(canMove(virus, "LEFT")) {
-                    virus.setDirection("LEFT");
-                }
-                else if (yDistToPlayer >= 0) {
-                    if(canMove(virus, "DOWN")) {
-                        virus.setDirection("DOWN");
-                    }
-                    else if (canMove(virus, "UP")) {
-                        virus.setDirection("UP");
-                    }
-                    else {
-                        virus.setDirection("RIGHT");
-                    }
-                }
-                else {
-                    if(canMove(virus, "UP")) {
-                        virus.setDirection("UP");
-                    }
-                    else if(canMove(virus, "DOWN")) {
-                        virus.setDirection("DOWN");
-                    }
-                    else {
-                        virus.setDirection("RIGHT");
-                    }
-                }
-            }
-        }
-        //y dist is greater
-        else {
-            if(yDistToPlayer >= 0) {
-                if(canMove(virus, "DOWN")) {
-                    virus.setDirection("DOWN");
-                }
-                else if(xDistToPLayer >= 0) {
-
-                }
-            }
-            else {
-
-            }
-        }
-        moveEntity(virus);
-    }
+    
+    //attempt at virus AI, might work on later
+//    public void moveVirus(Coronavirus virus, Person person) {
+//        //calculate x and y distance to player
+//        int xDistToPLayer = person.getX() - virus.getX();
+//        int yDistToPlayer = person.getY() - virus.getY();
+//        String oldDir = virus.getDirection();
+//        boolean goodDir = true;
+//
+//        //check if further in x or y direction, and move accordingly
+//        while(goodDir) {
+//            if (xDistToPLayer >= yDistToPlayer) {
+//                if (xDistToPLayer >= 0) {
+//                    if (canMove(virus, "RIGHT")) {
+//                        virus.setDirection("RIGHT");
+//                    } else if (yDistToPlayer >= 0) {
+//                        if (canMove(virus, "DOWN")) {
+//                            virus.setDirection("DOWN");
+//                        } else if (canMove(virus, "UP")) {
+//                            virus.setDirection("UP");
+//                        } else {
+//                            virus.setDirection("LEFT");
+//                        }
+//                    } else {
+//                        if (canMove(virus, "UP")) {
+//                            virus.setDirection("UP");
+//                        } else if (canMove(virus, "DOWN")) {
+//                            virus.setDirection("DOWN");
+//                        } else {
+//                            virus.setDirection("LEFT");
+//                        }
+//                    }
+//                } else {
+//                    if (canMove(virus, "LEFT")) {
+//                        virus.setDirection("LEFT");
+//                    } else if (yDistToPlayer >= 0) {
+//                        if (canMove(virus, "DOWN")) {
+//                            virus.setDirection("DOWN");
+//                        } else if (canMove(virus, "UP")) {
+//                            virus.setDirection("UP");
+//                        } else {
+//                            virus.setDirection("RIGHT");
+//                        }
+//                    } else {
+//                        if (canMove(virus, "UP")) {
+//                            virus.setDirection("UP");
+//                        } else if (canMove(virus, "DOWN")) {
+//                            virus.setDirection("DOWN");
+//                        } else {
+//                            virus.setDirection("RIGHT");
+//                        }
+//                    }
+//                }
+//            }
+//            //y dist is greater
+//            else {
+//                if (yDistToPlayer >= 0) {
+//                    if (canMove(virus, "DOWN")) {
+//                        virus.setDirection("DOWN");
+//                    } else if (xDistToPLayer >= 0) {
+//                        if (canMove(virus, "RIGHT")) {
+//                            virus.setDirection("RIGHT");
+//                        } else if (canMove(virus, "LEFT")) {
+//                            virus.setDirection("LEFT");
+//                        } else {
+//                            virus.setDirection("UP");
+//                        }
+//                    } else {
+//                        if (canMove(virus, "LEFT")) {
+//                            virus.setDirection("LEFT");
+//                        } else if (canMove(virus, "RIGHT")) {
+//                            virus.setDirection("RIGHT");
+//                        } else {
+//                            virus.setDirection("UP");
+//                        }
+//                    }
+//                } else {
+//                    if (canMove(virus, "UP")) {
+//                        virus.setDirection("UP");
+//                    } else if (xDistToPLayer >= 0) {
+//                        if (canMove(virus, "RIGHT")) {
+//                            virus.setDirection("RIGHT");
+//                        } else if (canMove(virus, "LEFT")) {
+//                            virus.setDirection("LEFT");
+//                        } else {
+//                            virus.setDirection("DOWN");
+//                        }
+//                    } else {
+//                        if (canMove(virus, "LEFT")) {
+//                            virus.setDirection("LEFT");
+//                        } else if (canMove(virus, "RIGHT")) {
+//                            virus.setDirection("RIGHT");
+//                        } else {
+//                            virus.setDirection("DOWN");
+//                        }
+//                    }
+//                }
+//            }
+////            if(virus.getDirection() == "RIGHT" && oldDir == "LEFT" || virus.getDirection() == "LEFT" && oldDir == "RIGHT"
+////               || virus.getDirection() == "UP" && oldDir == "DOWN" || virus.getDirection() == "DOWN" && oldDir == "UP") {
+////                goodDir = false;
+////            }
+//        }
+//        moveEntity(virus);
+//    }
 
     public boolean canCollectToiletPaper(Person p)
     {
@@ -1538,6 +1564,13 @@ public class ItsCoronaTime extends Application {
                                 Random rand = new Random();
                                 int randNum;
                                 randNum = rand.nextInt(4);
+
+                                String oldDir = rona2.getDirection();
+                                while((directions[randNum] == "RIGHT" && oldDir == "LEFT") || (directions[randNum] == "LEFT" && oldDir == "RIGHT")
+                                    || (directions[randNum] == "UP" && oldDir == "DOWN") || (directions[randNum] == "DOWN" && oldDir == "UP")) {
+                                    randNum  = rand.nextInt(4);
+                                }
+
                                 rona2.setDirection(directions[randNum]);
                             }
                         }
@@ -1566,9 +1599,6 @@ public class ItsCoronaTime extends Application {
                             }
                         }
                         else {
-//                            moveEntity(rona3);
-//                            ronaImageView3.setX(rona3.getX());
-//                            ronaImageView3.setY(rona3.getY());
                             if(canMove(rona3, rona3.getDirection())) {
                                 moveEntity(rona3);
                                 ronaImageView3.setX(rona3.getX());
@@ -1579,6 +1609,13 @@ public class ItsCoronaTime extends Application {
                                     Random rand = new Random();
                                     int randNum;
                                     randNum = rand.nextInt(4);
+
+                                    String oldDir = rona3.getDirection();
+                                    while((directions[randNum] == "RIGHT" && oldDir == "LEFT") || (directions[randNum] == "LEFT" && oldDir == "RIGHT")
+                                            || (directions[randNum] == "UP" && oldDir == "DOWN") || (directions[randNum] == "DOWN" && oldDir == "UP")) {
+                                        randNum  = rand.nextInt(4);
+                                    }
+
                                     rona3.setDirection(directions[randNum]);
                                 }
                             }
@@ -1623,6 +1660,13 @@ public class ItsCoronaTime extends Application {
                                     Random rand = new Random();
                                     int randNum;
                                     randNum = rand.nextInt(4);
+
+                                    String oldDir = rona1.getDirection();
+                                    while((directions[randNum] == "RIGHT" && oldDir == "LEFT") || (directions[randNum] == "LEFT" && oldDir == "RIGHT")
+                                            || (directions[randNum] == "UP" && oldDir == "DOWN") || (directions[randNum] == "DOWN" && oldDir == "UP")) {
+                                        randNum  = rand.nextInt(4);
+                                    }
+
                                     rona1.setDirection(directions[randNum]);
                                 }
                             }
@@ -1667,6 +1711,14 @@ public class ItsCoronaTime extends Application {
                                     Random rand = new Random();
                                     int randNum;
                                     randNum = rand.nextInt(4);
+
+                                    String oldDir = rona4.getDirection();
+                                    while((directions[randNum] == "RIGHT" && oldDir == "LEFT") || (directions[randNum] == "LEFT" && oldDir == "RIGHT")
+                                            || (directions[randNum] == "UP" && oldDir == "DOWN") || (directions[randNum] == "DOWN" && oldDir == "UP")) {
+                                        randNum  = rand.nextInt(4);
+                                    }
+
+
                                     rona4.setDirection(directions[randNum]);
                                 }
                             }
