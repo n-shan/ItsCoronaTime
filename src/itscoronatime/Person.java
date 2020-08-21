@@ -1,34 +1,34 @@
 package itscoronatime;
 
 public class Person extends Entity {
-    private int m_lives;
-    private int m_score;
-    private boolean m_isdead;
+    private int lives;
+    private int score;
+    private boolean isDead;
     private String imageName = "image/CoronaMan.png";
 
     public Person(int x, int y, int width, int height) {
         setLocation(x, y);
         setWidth(width);
         setHeight(height);
-        m_lives = 3;
-        m_score = 0;
-        m_isdead = false;
+        lives = 3;
+        score = 0;
+        isDead = false;
     }
 
     public String getImageName() { return imageName; }
 
-    public int getLives() { return m_lives; }
+    public int getLives() { return lives; }
 
-    public int getScore() { return m_score; }
+    public int getScore() { return score; }
 
-    public void incScore(int amount) { m_score += amount; }
+    public void incScore(int amount) { score += amount; }
 
-    public void decLives() { m_lives--; }
+    public void decLives() { lives--; }
 
-    public void incLives() { m_lives++; }
+    public void incLives() { lives++; }
 
-    public boolean isDead() { return m_isdead; }
+    public boolean isDead() { return isDead; }
 
-    public void setDead() { m_isdead = true; }
+    public void setDead() { isDead = true; }
 
 }
