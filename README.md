@@ -10,12 +10,8 @@ Play as Professor Ambrosio <img src="https://github.com/n-shan/ItsCoronaTime/blo
 
 **LOSE** by contracting the virus too many times
 
----
-
 ## Game Preview
 
-<img src="https://github.com/n-shan/ItsCoronaTime/blob/master/src/image/game_preview.png" width="500" height="500">
-
----
+<img src="https://github.com/n-shan/ItsCoronaTime/blob/master/src/image/game_preview.png" width="700" height="700">
 
 [Development Schedule](https://github.com/n-shan/ItsCoronaTime/blob/master/src/image/Team%20Assignment%20Schedule%20PDF.pdf)
