@@ -1,8 +1,6 @@
 # ItsCoronaTime
 CS23 Team Assignment
 
----
-
 ## About
 PAC-MAN clone themed after COVID-19
 
@@ -20,6 +18,4 @@ Play as Professor Ambrosio <img src="https://github.com/n-shan/ItsCoronaTime/blo
 
 ---
 
-## Schedule
-
-<img src="https://github.com/n-shan/ItsCoronaTime/blob/master/src/image/Team%20Assignment%20Schedule%20PDF.pdf">
+[Development Schedule](https://github.com/n-shan/ItsCoronaTime/blob/master/src/image/Team%20Assignment%20Schedule%20PDF.pdf)
