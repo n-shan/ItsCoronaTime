@@ -14,22 +14,8 @@ public class Coronavirus extends Entity {
         isInCage = true;
     }
 
-    //when hazmat suit is collected, allow virus to be killed
-    public void scare(){
-        canDie = true;
-    }
-
-    public boolean isScared(){
-        return canDie;
-    }
-
     public String getImageName(){
         return image;
-    }
-
-    //hazmat suit is off, allow virus to kill person
-    public void kill(){
-        canDie = false;
     }
 
     public void setIsInCage(boolean isInCage) {

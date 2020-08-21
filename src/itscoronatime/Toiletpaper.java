@@ -12,7 +12,6 @@ public class Toiletpaper extends Entity {
         setHeight(10);
     }
 
-
     public void collect(){
         setVisibility(false);
         isCollected = true;

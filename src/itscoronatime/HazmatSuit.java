@@ -3,7 +3,6 @@ package itscoronatime;
 public class HazmatSuit extends Entity {
     private String image = "image/PowerPellet.png";
     private final int width = 30, height = 30;
-    private final int pointVal = 50;
     private boolean isCollected;
 
     HazmatSuit(int x, int y) {

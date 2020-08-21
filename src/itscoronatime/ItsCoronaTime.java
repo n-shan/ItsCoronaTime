@@ -24,7 +24,6 @@ import java.io.File;
 import java.util.Random;
 
 public class ItsCoronaTime extends Application {
-
     private int moveSpeed = 10;
     private Toiletpaper pelletArr[] = new Toiletpaper[212];
     private Image pelletImageArr[] = new Image[212];
@@ -37,11 +36,9 @@ public class ItsCoronaTime extends Application {
     private int virusKills = 1;
     private int lifeIncreaseValue = 10000;
 
-
     //creates an array of booleans that will return if there is a wall at x,y space
     //size is determined by the total pixels of the arena dived by how many pixels person can move
     private boolean[][] walls = new boolean[1000/moveSpeed+1][1000/moveSpeed+1];
-
 
     public static void main(String[] args) { launch(args); }
 
@@ -51,7 +48,6 @@ public class ItsCoronaTime extends Application {
     private Image gameOverImage = new Image("image/GameOverScreen.png");
     private Image gameWonImage = new Image("image/GameWonScreen.png");
     private boolean startScreen = true;
-
 
     //sets the walls for the arena
     //the i is for the x coordinate
@@ -69,7 +65,6 @@ public class ItsCoronaTime extends Application {
         }
 
         // pellets for other half of top row
-
         arr[12].setX(940);
         arr[12].setY(110);
 
@@ -98,7 +93,6 @@ public class ItsCoronaTime extends Application {
         }
 
         // pellets for left long column
-
         arr[50].setX(225);
         arr[50].setY(259);
 
@@ -108,7 +102,6 @@ public class ItsCoronaTime extends Application {
         }
 
         //pellets for right long column
-
         arr[65].setX(765);
         arr[65].setY(259);
 
@@ -118,7 +111,6 @@ public class ItsCoronaTime extends Application {
         }
 
         //pellets for first bottom row
-
         arr[80].setX(50);
         arr[80].setY(650);
 
@@ -128,7 +120,6 @@ public class ItsCoronaTime extends Application {
         }
 
         //pellets for first bottom row cont
-
         arr[85].setX(265);
         arr[85].setY(650);
 
@@ -138,7 +129,6 @@ public class ItsCoronaTime extends Application {
         }
 
         //pellets for first bottom row right
-
         arr[91].setX(940);
         arr[91].setY(650);
 
@@ -177,7 +167,6 @@ public class ItsCoronaTime extends Application {
         }
 
         //pellets for top left bottom row
-
         arr[112].setX(85);
         arr[112].setY(300);
 
@@ -197,7 +186,6 @@ public class ItsCoronaTime extends Application {
         }
 
         //pellet for top left middle section
-
         arr[121].setX(225);
         arr[121].setY(145);
 
@@ -236,7 +224,6 @@ public class ItsCoronaTime extends Application {
         }
 
         // pellets for left column inner section
-
         arr[129].setX(330);
         arr[129].setY(262);
 
@@ -246,7 +233,6 @@ public class ItsCoronaTime extends Application {
         }
 
         //pellets for right column inner section
-
         arr[131].setX(660);
         arr[131].setY(262);
 
@@ -256,7 +242,6 @@ public class ItsCoronaTime extends Application {
         }
 
         //pellets for left row inner section
-
         arr[133].setX(330);
         arr[133].setY(301);
 
@@ -267,7 +252,6 @@ public class ItsCoronaTime extends Application {
         }
 
         //pellets for right row inner section
-
         arr[137].setX(621);
         arr[137].setY(301);
 
@@ -277,7 +261,6 @@ public class ItsCoronaTime extends Application {
         }
 
         //pellets for super bottom row
-
         arr[140].setX(50);
         arr[140].setY(900);
 
@@ -315,20 +298,16 @@ public class ItsCoronaTime extends Application {
 
         }
 
-
         //pellets for bottom right, middle right row
-
         arr[182].setX(905);
         arr[182].setY(728);
 
         for(int i = 183; i < 184; i++){
             arr[i].setX(arr[i - 1].getX() - 35);
             arr[i].setY(728);
-
         }
 
         //pellets for bottom left, middle left row
-
         arr[184].setX(85);
         arr[184].setY(728);
 
@@ -339,7 +318,6 @@ public class ItsCoronaTime extends Application {
         }
 
         //single pellet bottom left
-
         arr[186].setX(120);
         arr[186].setY(767);
 
@@ -357,7 +335,6 @@ public class ItsCoronaTime extends Application {
         arr[189].setY(767);
 
         //middle bottom left row
-
         arr[190].setX(50);
         arr[190].setY(810);
 
@@ -368,7 +345,6 @@ public class ItsCoronaTime extends Application {
         }
 
         //middle bottom left middle row
-
         arr[195].setX(330);
         arr[195].setY(810);
 
@@ -378,7 +354,6 @@ public class ItsCoronaTime extends Application {
         }
 
         //middle bottom right middle row
-
         arr[199].setX(550);
         arr[199].setY(810);
 
@@ -388,7 +363,6 @@ public class ItsCoronaTime extends Application {
         }
 
         //middle bottom right right row
-
         arr[203].setX(800);
         arr[203].setY(810);
 
@@ -409,14 +383,12 @@ public class ItsCoronaTime extends Application {
 
         arr[211].setX(940);
         arr[211].setY(850);
-        
-        
+
         //sets location for actual pellets
         for(int i = 0; i < arr.length; ++i)
         {
             pelletArr[i].setLocation((int)arr[i].getX(), (int)arr[i].getY());
         }
-        
     }
 
     public void setWalls()
@@ -610,16 +582,7 @@ public class ItsCoronaTime extends Application {
             }
         }
 
-        //walls for section 20
-        //going to need to have some special way to allow
-        //corona virus to get through this wall but not person
-//        for(int i = 470; i <= 530; i+=moveSpeed)
-//        {
-//            for(int j = 430; j <= 440; j+=moveSpeed)
-//            {
-//                walls[i/moveSpeed][j/moveSpeed] = true;
-//            }
-//        }
+        //no walls for section 20
 
         //walls for section 21
         for(int i = 0; i <= 190; i+=moveSpeed)
@@ -950,111 +913,6 @@ public class ItsCoronaTime extends Application {
             }
         }
     }
-
-    //attempt at virus AI, might work on later
-//    public void moveVirus(Coronavirus virus, Person person) {
-//        //calculate x and y distance to player
-//        int xDistToPLayer = person.getX() - virus.getX();
-//        int yDistToPlayer = person.getY() - virus.getY();
-//        String oldDir = virus.getDirection();
-//        boolean goodDir = true;
-//
-//        //check if further in x or y direction, and move accordingly
-//        while(goodDir) {
-//            if (xDistToPLayer >= yDistToPlayer) {
-//                if (xDistToPLayer >= 0) {
-//                    if (canMove(virus, "RIGHT")) {
-//                        virus.setDirection("RIGHT");
-//                    } else if (yDistToPlayer >= 0) {
-//                        if (canMove(virus, "DOWN")) {
-//                            virus.setDirection("DOWN");
-//                        } else if (canMove(virus, "UP")) {
-//                            virus.setDirection("UP");
-//                        } else {
-//                            virus.setDirection("LEFT");
-//                        }
-//                    } else {
-//                        if (canMove(virus, "UP")) {
-//                            virus.setDirection("UP");
-//                        } else if (canMove(virus, "DOWN")) {
-//                            virus.setDirection("DOWN");
-//                        } else {
-//                            virus.setDirection("LEFT");
-//                        }
-//                    }
-//                } else {
-//                    if (canMove(virus, "LEFT")) {
-//                        virus.setDirection("LEFT");
-//                    } else if (yDistToPlayer >= 0) {
-//                        if (canMove(virus, "DOWN")) {
-//                            virus.setDirection("DOWN");
-//                        } else if (canMove(virus, "UP")) {
-//                            virus.setDirection("UP");
-//                        } else {
-//                            virus.setDirection("RIGHT");
-//                        }
-//                    } else {
-//                        if (canMove(virus, "UP")) {
-//                            virus.setDirection("UP");
-//                        } else if (canMove(virus, "DOWN")) {
-//                            virus.setDirection("DOWN");
-//                        } else {
-//                            virus.setDirection("RIGHT");
-//                        }
-//                    }
-//                }
-//            }
-//            //y dist is greater
-//            else {
-//                if (yDistToPlayer >= 0) {
-//                    if (canMove(virus, "DOWN")) {
-//                        virus.setDirection("DOWN");
-//                    } else if (xDistToPLayer >= 0) {
-//                        if (canMove(virus, "RIGHT")) {
-//                            virus.setDirection("RIGHT");
-//                        } else if (canMove(virus, "LEFT")) {
-//                            virus.setDirection("LEFT");
-//                        } else {
-//                            virus.setDirection("UP");
-//                        }
-//                    } else {
-//                        if (canMove(virus, "LEFT")) {
-//                            virus.setDirection("LEFT");
-//                        } else if (canMove(virus, "RIGHT")) {
-//                            virus.setDirection("RIGHT");
-//                        } else {
-//                            virus.setDirection("UP");
-//                        }
-//                    }
-//                } else {
-//                    if (canMove(virus, "UP")) {
-//                        virus.setDirection("UP");
-//                    } else if (xDistToPLayer >= 0) {
-//                        if (canMove(virus, "RIGHT")) {
-//                            virus.setDirection("RIGHT");
-//                        } else if (canMove(virus, "LEFT")) {
-//                            virus.setDirection("LEFT");
-//                        } else {
-//                            virus.setDirection("DOWN");
-//                        }
-//                    } else {
-//                        if (canMove(virus, "LEFT")) {
-//                            virus.setDirection("LEFT");
-//                        } else if (canMove(virus, "RIGHT")) {
-//                            virus.setDirection("RIGHT");
-//                        } else {
-//                            virus.setDirection("DOWN");
-//                        }
-//                    }
-//                }
-//            }
-////            if(virus.getDirection() == "RIGHT" && oldDir == "LEFT" || virus.getDirection() == "LEFT" && oldDir == "RIGHT"
-////               || virus.getDirection() == "UP" && oldDir == "DOWN" || virus.getDirection() == "DOWN" && oldDir == "UP") {
-////                goodDir = false;
-////            }
-//        }
-//        moveEntity(virus);
-//    }
     
     public boolean canCollectToiletPaper(Person p)
     {
@@ -1252,8 +1110,6 @@ public class ItsCoronaTime extends Application {
         return false;
     }
 
-
-
     public boolean checkInfected(Person p, Coronavirus c1, Coronavirus c2, Coronavirus c3, Coronavirus c4)
     {
         if(isInfected(p, c1))
@@ -1280,7 +1136,6 @@ public class ItsCoronaTime extends Application {
         return 0;
     }
 
-
     public boolean allToiletPaperCollected()
     {
         for(int i = 0; i < pelletArr.length; ++i)
@@ -1293,11 +1148,7 @@ public class ItsCoronaTime extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-
         setWalls();
-
-
-
         Pane gamePane = new Pane();
 
         //play corona time music
@@ -1307,20 +1158,13 @@ public class ItsCoronaTime extends Application {
         Media media = new Media(new File(musicFile).toURI().toString());
         Media mediaGameOver = new Media((new File(musicFile2).toURI().toString()));
 
-
         MediaPlayer mediaPlayer = new MediaPlayer(media);
         MediaPlayer mediaPlayerGameOver = new MediaPlayer(mediaGameOver);
 
         mediaPlayer.play();
 
-
         //create pellet arrays to hold all toiletpaper (pellets)
-
-        
-
-
         //create ToiletPaper entities
-
         for(int i = 0; i < pelletArr.length; i++){
 
             pelletArr[i] = new Toiletpaper();
@@ -1331,15 +1175,11 @@ public class ItsCoronaTime extends Application {
             pelletImageViewArr[i].setY(pelletArr[i].getY());
         }
 
-
         setpellets(pelletImageViewArr);
-
 
         for(int i = 0; i < pelletImageViewArr.length; i++){
             gamePane.getChildren().addAll(pelletImageViewArr[i]);
         }
-
-
 
         //create person
         Person person = new Person(210, 90, 50, 50);
@@ -1380,7 +1220,6 @@ public class ItsCoronaTime extends Application {
         ImageView ronaSadImageView3 = new ImageView(ronaSadImage3);
         ImageView ronaSadImageView4 = new ImageView(ronaSadImage4);
 
-
         //set ImageView locations
         ronaImageView1.setX(rona1.getX());
         ronaImageView1.setY(rona1.getY());
@@ -1410,7 +1249,6 @@ public class ItsCoronaTime extends Application {
         ronaSadImageView2.setVisible(false);
         ronaSadImageView3.setVisible(false);
         ronaSadImageView4.setVisible(false);
-
 
         //create hazmatsuits
         HazmatSuit hazmatSuit1 = new HazmatSuit(40, 155);
@@ -1444,7 +1282,6 @@ public class ItsCoronaTime extends Application {
         hazmatImageView4.setX(hazmatSuit4.getX());
         hazmatImageView4.setY(hazmatSuit4.getY());
 
-
         //create scoreboard
         Text scoreBoard = new Text(430, 60, String.format("%06d", person.getScore()));
         scoreBoard.setFill(Color.WHITE);
@@ -1460,19 +1297,14 @@ public class ItsCoronaTime extends Application {
         displayHazmatTimer.setFill(Color.WHITE);
         displayHazmatTimer.setFont(Font.font(40));
 
-
         //add imageviews and text to pane
         gamePane.getChildren().addAll(hazmatImageView1, hazmatImageView2, hazmatImageView3, hazmatImageView4,
                 ronaImageView1, ronaImageView2, ronaImageView3, ronaImageView4, ronaSadImageView1, ronaSadImageView2, ronaSadImageView3, ronaSadImageView4, personImageView, scoreBoard, displayLives, displayHazmatTimer);
 
         StackPane stackPane = new StackPane();
-
         Pane pane = new Pane();
-
         pane.getChildren().add(new ImageView(startImage));
-
         stackPane.getChildren().addAll(pane);
-
         Scene scene = new Scene(stackPane, 1000, 1000);
 
         primaryStage.setTitle("Its Corona Time");
@@ -1627,10 +1459,7 @@ public class ItsCoronaTime extends Application {
                             default:    //do nothing
                                 break;
                         }
-
-
                     }
-
 
                     //checks to see if all the toilet paper has been collected
                     if(allToiletPaperCollected())
